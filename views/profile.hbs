@@ -1,0 +1,82 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Soundlist</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/list/users">All users</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/profile">{{user.user_name}}</a></li>
+        <a href="/logout"><button type="button" class="btn btn-default navbar-btn">Log out</button></a>   
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
+</nav>
+<body>
+  <div class="container col-sm-12" id="mainform">
+      <div id="signupbox" style=" margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                                        
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <div class="panel-title col-lg-6 col-md-4 col-sm-8">
+              Update your information
+            </div>
+            <span class="input-group-btn">
+              <a href="/profile/delete"><button class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete Account</button></a>
+            </span>
+          </div> 
+          <div class="panel-body" >
+            <form class="form-horizontal" role="form" method="post" action="/profile/update" onSubmit="return checkblank(this);">
+              {{#if message}}
+                <div class="alert alert-success col-sm-12">{{message}}</div>
+                <div id="signupalert" style="display:none" class="alert alert-danger">
+                  <p>Error:</p>
+                  <span></span>
+                </div>
+              {{/if}}
+              <div class="form-group">
+                  <label for="user_name" class="col-md-3 control-label">First Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" name="first_name" placeholder={{user.first_name}}>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="user_name" class="col-md-3 control-label">Last Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" name="last_name" placeholder={{user.last_name}}>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="user_name" class="col-md-3 control-label">User Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" name="user_name" placeholder={{user.user_name}}>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="col-md-3 control-label">Password</label>
+                  <div class="col-md-9">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <!-- Button -->                                       
+                  <div class="col-md-offset-3 col-md-9">
+                    <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Update</button>      
+                  </div>
+                </div>
+            </form>
+          </div>
+        </div>      
+    </div>
+  </div>
+</body>

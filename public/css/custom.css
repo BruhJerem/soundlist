@@ -1,0 +1,40 @@
+.hero-area {
+    padding: 250px 0 200px;
+    position: relative
+  }
+  .layer-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0
+  }
+  
+  .section {
+    padding-top: 80px;
+    padding-bottom: 80px
+  }
+
+  .form-control {
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #c7c7c7;
+    height: 60px
+  }
+
+  .rounded-lg {
+    border-radius: 15px
+  }
+
+  .shadow-down {
+    position: relative
+  }
+  
+  .shadow-down::before {
+    position: absolute;
+    content: "";
+    box-shadow: 0 0 80.75px 14.25px rgba(224, 241, 255, .34);
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1
+  }

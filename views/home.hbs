@@ -1,0 +1,154 @@
+<div style="radial-gradient(circle, black, white)">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Soundlist</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <a href="/login"><button type="button" class="btn btn-default navbar-btn">Sign in</button></a>
+        <li><a href="/register">Sign Up</a></li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
+</nav>
+  <section class="section" style="background-image:url(/images/backgrounds/background.jpg)">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="section-title text-white">Welcome to Soundlist</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about" style="background-image:url(/images/backgrounds/bg-dots.png)">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2 class="section-title">About</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 mx-auto text-center">
+          <p class="font-secondary lead text-dark">Soundlist is the new way to manage your playlists. With Soundlist you can decide to share your playlist or not with your friends. Soundlist is the best way to keep track of what you listen. Invite your friends and get into this new social network of music.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container card">
+      <div class="row" style="padding-top: 20px; padding-bottom: 40px">
+        <div class="col-12 text-center">
+          <h2 class="section-title">Contact us</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 mx-auto pb-5">
+          <div class="bg-white rounded text-center p-5 shadow-down text-center">
+            <p class="cars-text"> 
+              <span style="font-size: 2em; color: Dodgerblue;">
+                <i class="fa fa-phone"></i>
+              </span>
+              +33 9 29 38 23 23
+            </p>
+            <p class="cars-text"> 
+              <span style="font-size: 2em; color: Dodgerblue;">
+                <i class="fa fa-envelope"></i>
+              </span>
+              jeremie.bruhwiler@epitech.eu
+            </p>
+            <p class="cars-text"> 
+              <span style="font-size: 2em; color: Dodgerblue;">
+                <i class="fa fa-map-marker"></i>
+              </span>
+              Address
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-8 mx-auto">
+          <div class="bg-white rounded-lg text-center p-5 shadow-down">
+            <form action="" method="POST" class="row">
+
+              <div class="messages"></div>
+
+              <div class="controls">
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="form_name">Firstname *</label>
+                      <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+                      <div class="help-block with-errors"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="form_lastname">Lastname *</label>
+                      <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                      <div class="help-block with-errors"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="form_email">Email *</label>
+                      <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                      <div class="help-block with-errors"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="form_phone">Phone</label>
+                      <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Please enter your phone">
+                      <div class="help-block with-errors"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="form_message">Message *</label>
+                      <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
+                      <div class="help-block with-errors"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <input type="submit" class="btn btn-success btn-send" value="Send message">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                      <p class="text-muted"><strong>*</strong> These fields are required.</p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div style="background: linear-gradient(black, white);">
+
+<style>
+  html {
+  scroll-behavior: smooth;
+}
+</style>

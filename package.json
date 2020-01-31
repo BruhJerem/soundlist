@@ -1,0 +1,31 @@
+{
+  "name": "soundlist",
+  "version": "1.0.0",
+  "description": "Node JS Project for Next Generation Web Jonköping University",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BruhJerem/soundlist.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BruhJerem/soundlist/issues"
+  },
+  "homepage": "https://github.com/BruhJerem/soundlist#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
+    "jquery": "^1.12.4",
+    "popper.js": "^1.16.1",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {}
+}
