@@ -27,21 +27,25 @@
   <div class="container col-sm-12" id="mainform">
     <div style=" margin-top:100px" class="jumbotron jumbotron-fluid mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
       <div>
-        {{#if indexPage}}
-          <h1>Your Playlists</h1>
-        {{else}}
-          <h1>{{profile.user_name}}'s Playlists</h1>
-        {{/if}}
+        <h1>{{playlist.name}}</h1>
+        <h3>{{playlist.description}}</h3>
       </div>
       {{#if indexPage}}
-        <div class="topcorner">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
-            Add playlist
-          </button>
+        <div class="topcorner row">
+          <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+              Add song
+            </button>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updatePlaylistModal">
+              Edit playlist
+            </button>
+          </div>
         </div>
       {{/if}}
       <div class="row" style="justify-content: center; text-align: center;">
-        {{#each playlist as |item i|}}
+        {{#each songs as |item i|}}
         <div class="col-sm-6" style="margin-bottom: 10px;">
           <div class="card" style="padding: 10px;">
             <div class="card-header">
@@ -59,51 +63,61 @@
                   {{name}}
                 </h4>
               </div>
-              <div class="col">
-                <span style="font-size: 2em; color: #337AB7;">
-                  {{#ifEquals public "true"}}
-                    <i class="fa fa-eye"></i>
-                  {{else}}
-                    <i class="fa fa-eye-slash"></i>
-                  {{/ifEquals}}
-                </span>
-              </div>
-            </div>
-            <div class="card-body">
-              {{#if description}}
-                <p class="card-text">{{description}}</p>
-              {{else}}
-                <p class="card-text">No description :(</p>
-              {{/if}}
-              <a href="/playlist/{{id}}" class="btn btn-primary">Go to songs</a>
             </div>
           </div>
         </div>
         {{else}}
-          <h3>No playlist found :(</h3>
+          <h3>No songs found :(</h3>
         {{/each}}
       </div>
     </div>
-    <!-- Modal Add -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLaber" aria-hidden="false">
+    <!-- Modal Update Playlist -->
+    <div class="modal fade" id="updatePlaylistModal" tabindex="-1" role="dialog" aria-labelledby="updatePlaylistModalLabel" aria-hidden="false">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <form method="post" action="/playlist/add">
+          <form method="post" action="/playlist/update/{{playlist.id}}">
             <div class="modal-header">
-              <h1 class="modal-title" id="addModalLaber">Add playlist</h1>
+              <h1 class="modal-title" id="updatePlaylistModalLabel">Update playlist</h1>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body form-container">
               <label for="playlist_name">Name</label>
-              <input type="text" placeholder="Enter playlist name" name="playlist_name" required>
+              <input type="text" placeholder="{{playlist.name}}" name="playlist_name" >
 
               <label for="description">Description</label>
-              <input type="text" placeholder="Enter a description" name="description">
+              <input type="text" placeholder="{{playlist.description}}" name="description">
 
               <label for="public">Public</label>
-              <input type="checkbox" name="public">
+              {{#ifEquals playlist.public "true"}}
+                <input type="checkbox" name="public" checked>
+              {{else}}
+                <input type="checkbox" name="public">
+              {{/ifEquals}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Add Song -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLaber" aria-hidden="false">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form method="post" action="/song/add?playlist_id={{playlist.id}}">
+            <div class="modal-header">
+              <h1 class="modal-title" id="addModalLaber">Add Song</h1>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body form-container">
+              <label for="song_name">Name</label>
+              <input type="text" placeholder="Enter song name" name="song_name" required>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -113,12 +127,12 @@
         </div>
       </div>
     </div>
-    {{#each playlist as |item i|}}
-    <!-- Modal update -->
+    {{#each songs as |item i|}}
+    <!-- Modal update song -->
     <div class="modal fade" id="updateModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="updateModalLaber" aria-hidden="false">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <form method="post" action="/playlist/update/{{id}}">
+          <form method="post" action="/song/update/{{id}}">
             <div class="modal-header">
               <h1 class="modal-title" id="updateModalLaber">Update {{name}}</h1>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -126,21 +140,11 @@
               </button>
             </div>
             <div class="modal-body form-container">
-              <label for="playlist_name">Name</label>
-              <input type="text" placeholder="{{name}}" name="playlist_name" required>
-
-              <label for="description">Description</label>
-              <input type="text" placeholder="{{description}}" name="description">
-
-              <label for="public">Public</label>
-              {{#ifEquals this.public "true"}}
-                <input type="checkbox" name="public" checked>
-              {{else}}
-                <input type="checkbox" name="public">
-              {{/ifEquals}}
+              <label for="song_name">Name</label>
+              <input type="text" placeholder="{{name}}" name="song_name">
             </div>
             <div class="modal-footer">
-              <a href="/playlist/delete/{{id}}"><button type="button" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button></a>
+              <a href="/song/delete/{{id}}"><button type="button" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button></a>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
@@ -161,8 +165,6 @@
   }
 
   {box-sizing: border-box;}
-
-
 
 /* Add styles to the form container */
 .form-container {
