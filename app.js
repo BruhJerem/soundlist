@@ -93,7 +93,7 @@ app.get('/', function(req, res) {
 
 app.get('/list/users', checkConnection, function(req, res) {
   var user =  req.session.user;
-  
+  userId = req.session.userId;
   var sql="SELECT id, user_name FROM USERS WHERE NOT id='"+userId+"' ORDER BY user_name;";
   db.all(sql, function(err, results){
     if (err) {
