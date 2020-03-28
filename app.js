@@ -30,7 +30,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 600000 }
 }))
 
 db.serialize(function() {
@@ -89,6 +89,39 @@ app.get('/', function(req, res) {
   } else {
     res.render('home.hbs')
   }
+})
+
+app.post('/', function (req, res) {
+  message = 'Thank you, we get back to you shortly.';
+  res.render("home.hbs", {message: message});
+})
+
+app.get('/about', function(req, res) {
+  userId = req.session.userId;
+	if(userId == null){
+		res.redirect("/");
+		return;
+  }
+  res.render('about.hbs')
+})
+
+app.get('/contact', function(req, res) {
+  userId = req.session.userId;
+	if(userId == null){
+		res.redirect("/");
+		return;
+  }
+  res.render('contact.hbs')
+})
+
+app.post('/contact', function (req, res) {
+  message = 'Thank you, we get back to you shortly.';
+  userId = req.session.userId;
+	if(userId == null){
+		res.render("home.hbs", {message: message});
+		return;
+  }
+  res.render('contact.hbs', {message: message})
 })
 
 app.get('/list/users', checkConnection, function(req, res) {
@@ -499,7 +532,7 @@ app.get('/profile/delete/', function(req, res){
 let checkToken = (req, res, next) => {
   let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
   if (!token) {
-    return res.status(400).send({
+    return res.status(401).send({
       success: 'false',
       message: 'no authorization'
     });
@@ -587,6 +620,66 @@ app.post(api_link+'oauth/login', (req, res) => {
   }
 })
 
+app.post(api_link+'oauth/register', (req, res) => {
+  if(req.method == "POST"){
+      var post  = req.query;
+      var name= post.user_name;
+      var pass= post.password;
+      var fname= post.first_name;
+      var lname= post.last_name;
+
+      if (!name) {
+        return res.status(400).send({
+          success: "false",
+          message: "no user_name"
+        }) 
+      }
+      if (!pass) {
+        return res.status(400).send({
+          success: "false",
+          message: "no password"
+        }) 
+      }
+      if (!fname) {
+        return res.status(400).send({
+          success: "false",
+          message: "no first_name"
+        }) 
+      }
+      if (!lname) {
+        return res.status(400).send({
+          success: "false",
+          message: "no last_name"
+        }) 
+      }
+
+      var hash = bcrypt.hashSync(pass, salt);
+
+      var sql = "INSERT INTO `users`(`first_name`,`last_name`,`user_name`, `password`) VALUES ('" + fname + "','" + lname + "','" + name + "','" + hash + "')";
+
+      var query = db.prepare(sql)
+      query.run(function(err) {
+        if (err) {
+          console.log(err)
+          return res.status(400).send({
+            success: "false",
+            message: "username already taken"
+          })
+        } else {
+          return res.status(200).send({
+            success: "true",
+            message: "account created"
+          })
+        }
+      })
+  } else {
+    return res.status(400).send({
+      success: "false",
+      message: "an error has occured"
+    })
+  }
+})
+
 app.get(api_link + 'playlist', checkToken, (req, res) => {
   var userId = req.decoded.id
   var sql="SELECT * FROM PLAYLIST WHERE user_id='"+userId+"' ORDER BY name;";
@@ -626,7 +719,7 @@ app.post(api_link + 'playlist/add', checkToken, (req, res) => {
   var query = db.prepare(sql)
   query.run(function(err) {
     if (err) {
-      return res.status(200).send({
+      return res.status(400).send({
         success: 'false',
         message: err
       })
@@ -661,6 +754,12 @@ app.delete(api_link + 'playlist/delete', checkToken, (req, res) => {
       });
     }
     const playlist = results[0]
+    if (!playlist) {
+      return res.status(400).send({
+        success: 'false',
+        message: "playlist not found"
+      });
+    }
 
     if (playlist.user_id == userId) {
       // Here we can proceed the delete
@@ -867,11 +966,10 @@ app.delete(api_link+'song/delete', checkToken, (req, res) => {
       });
     }
     var song = songs[0]
-    console.log(song)
     if (!song) {
       return res.status(400).send({
         success: 'false',
-        message: 'can not find song'
+        message: 'song not found'
       });
     }
     var playlist_id = song.playlist_id
@@ -912,3 +1010,5 @@ app.delete(api_link+'song/delete', checkToken, (req, res) => {
 
 app.listen(port)
 console.log("Listening on port " + port + " ...");
+
+// CHECK BY DELETE PLAYLIST IF PLAYLIST EXISTS !!!!
