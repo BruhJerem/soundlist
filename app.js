@@ -17,6 +17,12 @@ const port = 8080
 const api_link = '/api/v1/'
 const app = express();
 
+// RDF
+var rdfModule = require('./RDF/RDFTripleStore.js');
+var queryRdf = rdfModule.queryRdf;
+
+queryRdf();
+
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });

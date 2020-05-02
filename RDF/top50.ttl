@@ -1,0 +1,726 @@
+@prefix : <http://example.org/Song/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<Song> a rdfs:Class .
+
+<Acousticness> a <Song> .
+
+<Beats.Per.Minute> a <Song> .
+
+<Danceability> a <Song> .
+
+<Energy> a <Song> .
+
+<Length> a <Song> .
+
+<Loudness..dB..> a <Song> .
+
+<Popularity> a <Song> .
+
+<Speechiness> a <Song> .
+
+<Track.Name> a <Song> .
+
+<Valence> a <Song> .
+
+:0.958333333333333 a dbo:Song ;
+    <Acousticness> "22" ;
+    <Beats.Per.Minute> "96" ;
+    <Danceability> "78" ;
+    <Energy> "71" ;
+    <Length> "176" ;
+    <Loudness..dB..> "-5" ;
+    <Popularity> "89" ;
+    <Speechiness> "28" ;
+    <Track.Name> "0.958333333333333" ;
+    <Valence> "68" ;
+    dbo:MusicGenre "reggaeton" ;
+    dbo:artist "Maluma" .
+
+:7_rings a dbo:Song ;
+    <Acousticness> "59" ;
+    <Beats.Per.Minute> "140" ;
+    <Danceability> "78" ;
+    <Energy> "32" ;
+    <Length> "179" ;
+    <Loudness..dB..> "-11" ;
+    <Popularity> "89" ;
+    <Speechiness> "33" ;
+    <Track.Name> "7 rings" ;
+    <Valence> "33" ;
+    dbo:MusicGenre "dance pop" ;
+    dbo:artist "Ariana Grande" .
+
+<http://example.org/Song/Antisocial_(with_Travis_Scott)> a dbo:Song ;
+    <Acousticness> "13" ;
+    <Beats.Per.Minute> "152" ;
+    <Danceability> "72" ;
+    <Energy> "82" ;
+    <Length> "162" ;
+    <Loudness..dB..> "-5" ;
+    <Popularity> "87" ;
+    <Speechiness> "5" ;
+    <Track.Name> "Antisocial (with Travis Scott)" ;
+    <Valence> "91" ;
+    dbo:MusicGenre "pop" ;
+    dbo:artist "Ed Sheeran" .
+
+<http://example.org/Song/Beautiful_People_(feat._Khalid)> a dbo:Song ;
+    <Acousticness> "12" ;
+    <Beats.Per.Minute> "93" ;
+    <Danceability> "64" ;
+    <Energy> "65" ;
+    <Length> "198" ;
+    <Loudness..dB..> "-8" ;
+    <Popularity> "86" ;
+    <Speechiness> "19" ;
+    <Track.Name> "Beautiful People (feat. Khalid)" ;
+    <Valence> "55" ;
+    dbo:MusicGenre "pop" ;
+    dbo:artist "Ed Sheeran" .
+
+:Call_You_Mine a dbo:Song ;
+    <Acousticness> "23" ;
+    <Beats.Per.Minute> "104" ;
+    <Danceability> "59" ;
+    <Energy> "70" ;
+    <Length> "218" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "88" ;
+    <Speechiness> "3" ;
+    <Track.Name> "Call You Mine" ;
+    <Valence> "50" ;
+    dbo:MusicGenre "edm" ;
+    dbo:artist "The Chainsmokers" .
+
+:Callaita a dbo:Song ;
+    <Acousticness> "60" ;
+    <Beats.Per.Minute> "176" ;
+    <Danceability> "61" ;
+    <Energy> "62" ;
+    <Length> "251" ;
+    <Loudness..dB..> "-5" ;
+    <Popularity> "93" ;
+    <Speechiness> "31" ;
+    <Track.Name> "Callaita" ;
+    <Valence> "24" ;
+    dbo:MusicGenre "reggaeton" ;
+    dbo:artist "Bad Bunny" .
+
+:China a dbo:Song ;
+    <Acousticness> "8" ;
+    <Beats.Per.Minute> "105" ;
+    <Danceability> "79" ;
+    <Energy> "81" ;
+    <Length> "302" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "92" ;
+    <Speechiness> "9" ;
+    <Track.Name> "China" ;
+    <Valence> "61" ;
+    dbo:MusicGenre "reggaeton flow" ;
+    dbo:artist "Anuel AA" .
+
+:Con_Altura a dbo:Song ;
+    <Acousticness> "39" ;
+    <Beats.Per.Minute> "98" ;
+    <Danceability> "88" ;
+    <Energy> "69" ;
+    <Length> "162" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "88" ;
+    <Speechiness> "12" ;
+    <Track.Name> "Con Altura" ;
+    <Valence> "75" ;
+    dbo:MusicGenre "r&b en espanol" ;
+    dbo:artist "ROSALÍA" .
+
+:Con_Calma a dbo:Song ;
+    <Acousticness> "11" ;
+    <Beats.Per.Minute> "94" ;
+    <Danceability> "74" ;
+    <Energy> "86" ;
+    <Length> "193" ;
+    <Loudness..dB..> "-3" ;
+    <Popularity> "91" ;
+    <Speechiness> "6" ;
+    <Track.Name> "Con Calma" ;
+    <Valence> "66" ;
+    dbo:MusicGenre "latin" ;
+    dbo:artist "Daddy Yankee" .
+
+<http://example.org/Song/Cross_Me_(feat._Chance_the_Rapper_&_PnB_Rock)> a dbo:Song ;
+    <Acousticness> "21" ;
+    <Beats.Per.Minute> "95" ;
+    <Danceability> "75" ;
+    <Energy> "79" ;
+    <Length> "206" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "82" ;
+    <Speechiness> "12" ;
+    <Track.Name> "Cross Me (feat. Chance the Rapper & PnB Rock)" ;
+    <Valence> "61" ;
+    dbo:MusicGenre "pop" ;
+    dbo:artist "Ed Sheeran" .
+
+:Dance_Monkey a dbo:Song ;
+    <Acousticness> "69" ;
+    <Beats.Per.Minute> "98" ;
+    <Danceability> "82" ;
+    <Energy> "59" ;
+    <Length> "210" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "83" ;
+    <Speechiness> "10" ;
+    <Track.Name> "Dance Monkey" ;
+    <Valence> "54" ;
+    dbo:MusicGenre "australian pop" ;
+    dbo:artist "Tones and I" .
+
+<http://example.org/Song/Goodbyes_(Feat._Young_Thug)> a dbo:Song ;
+    <Acousticness> "45" ;
+    <Beats.Per.Minute> "150" ;
+    <Danceability> "58" ;
+    <Energy> "65" ;
+    <Length> "175" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "94" ;
+    <Speechiness> "7" ;
+    <Track.Name> "Goodbyes (Feat. Young Thug)" ;
+    <Valence> "18" ;
+    dbo:MusicGenre "dfw rap" ;
+    dbo:artist "Post Malone" .
+
+:Happier a dbo:Song ;
+    <Acousticness> "19" ;
+    <Beats.Per.Minute> "100" ;
+    <Danceability> "69" ;
+    <Energy> "79" ;
+    <Length> "214" ;
+    <Loudness..dB..> "-3" ;
+    <Popularity> "88" ;
+    <Speechiness> "5" ;
+    <Track.Name> "Happier" ;
+    <Valence> "67" ;
+    dbo:MusicGenre "brostep" ;
+    dbo:artist "Marshmello" .
+
+:Higher_Love a dbo:Song ;
+    <Acousticness> "2" ;
+    <Beats.Per.Minute> "104" ;
+    <Danceability> "69" ;
+    <Energy> "68" ;
+    <Length> "228" ;
+    <Loudness..dB..> "-7" ;
+    <Popularity> "88" ;
+    <Speechiness> "3" ;
+    <Track.Name> "Higher Love" ;
+    <Valence> "40" ;
+    dbo:MusicGenre "edm" ;
+    dbo:artist "Kygo" .
+
+<http://example.org/Song/How_Do_You_Sleep?> a dbo:Song ;
+    <Acousticness> "15" ;
+    <Beats.Per.Minute> "111" ;
+    <Danceability> "48" ;
+    <Energy> "68" ;
+    <Length> "202" ;
+    <Loudness..dB..> "-5" ;
+    <Popularity> "90" ;
+    <Speechiness> "9" ;
+    <Track.Name> "How Do You Sleep?" ;
+    <Valence> "35" ;
+    dbo:MusicGenre "pop" ;
+    dbo:artist "Sam Smith" .
+
+<http://example.org/Song/I_Don_t_Care_(with_Justin_Bieber)> a dbo:Song ;
+    <Acousticness> "9" ;
+    <Beats.Per.Minute> "102" ;
+    <Danceability> "80" ;
+    <Energy> "68" ;
+    <Length> "220" ;
+    <Loudness..dB..> "-5" ;
+    <Popularity> "84" ;
+    <Speechiness> "4" ;
+    <Track.Name> "I Don't Care (with Justin Bieber)" ;
+    <Valence> "84" ;
+    dbo:MusicGenre "pop" ;
+    dbo:artist "Ed Sheeran" .
+
+:If_I_Can_t_Have_You a dbo:Song ;
+    <Acousticness> "49" ;
+    <Beats.Per.Minute> "124" ;
+    <Danceability> "69" ;
+    <Energy> "82" ;
+    <Length> "191" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "70" ;
+    <Speechiness> "6" ;
+    <Track.Name> "If I Can't Have You" ;
+    <Valence> "87" ;
+    dbo:MusicGenre "canadian pop" ;
+    dbo:artist "Shawn Mendes" .
+
+:It_s_You a dbo:Song ;
+    <Acousticness> "37" ;
+    <Beats.Per.Minute> "96" ;
+    <Danceability> "73" ;
+    <Energy> "46" ;
+    <Length> "213" ;
+    <Loudness..dB..> "-7" ;
+    <Popularity> "89" ;
+    <Speechiness> "3" ;
+    <Track.Name> "It's You" ;
+    <Valence> "40" ;
+    dbo:MusicGenre "canadian hip hop" ;
+    dbo:artist "Ali Gatie" .
+
+:LA_CANCIÓN a dbo:Song ;
+    <Acousticness> "15" ;
+    <Beats.Per.Minute> "176" ;
+    <Danceability> "75" ;
+    <Energy> "65" ;
+    <Length> "243" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "90" ;
+    <Speechiness> "32" ;
+    <Track.Name> "LA CANCIÓN" ;
+    <Valence> "43" ;
+    dbo:MusicGenre "latin" ;
+    dbo:artist "J Balvin" .
+
+:Lalala a dbo:Song ;
+    <Acousticness> "18" ;
+    <Beats.Per.Minute> "130" ;
+    <Danceability> "84" ;
+    <Energy> "39" ;
+    <Length> "161" ;
+    <Loudness..dB..> "-8" ;
+    <Popularity> "88" ;
+    <Speechiness> "8" ;
+    <Track.Name> "Lalala" ;
+    <Valence> "50" ;
+    dbo:MusicGenre "canadian hip hop" ;
+    dbo:artist "Y2K" .
+
+<http://example.org/Song/Loco_Contigo_(feat._J._Balvin_&_Tyga)> a dbo:Song ;
+    <Acousticness> "28" ;
+    <Beats.Per.Minute> "96" ;
+    <Danceability> "82" ;
+    <Energy> "71" ;
+    <Length> "185" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "86" ;
+    <Speechiness> "7" ;
+    <Track.Name> "Loco Contigo (feat. J. Balvin & Tyga)" ;
+    <Valence> "38" ;
+    dbo:MusicGenre "dance pop" ;
+    dbo:artist "DJ Snake" .
+
+<http://example.org/Song/Money_In_The_Grave_(Drake_ft._Rick_Ross)> a dbo:Song ;
+    <Acousticness> "10" ;
+    <Beats.Per.Minute> "101" ;
+    <Danceability> "83" ;
+    <Energy> "50" ;
+    <Length> "205" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "92" ;
+    <Speechiness> "5" ;
+    <Track.Name> "Money In The Grave (Drake ft. Rick Ross)" ;
+    <Valence> "10" ;
+    dbo:MusicGenre "canadian hip hop" ;
+    dbo:artist "Drake" .
+
+:Never_Really_Over a dbo:Song ;
+    <Acousticness> "19" ;
+    <Beats.Per.Minute> "100" ;
+    <Danceability> "77" ;
+    <Energy> "88" ;
+    <Length> "224" ;
+    <Loudness..dB..> "-5" ;
+    <Popularity> "89" ;
+    <Speechiness> "6" ;
+    <Track.Name> "Never Really Over" ;
+    <Valence> "39" ;
+    dbo:MusicGenre "dance pop" ;
+    dbo:artist "Katy Perry" .
+
+<http://example.org/Song/No_Guidance_(feat._Drake)> a dbo:Song ;
+    <Acousticness> "12" ;
+    <Beats.Per.Minute> "93" ;
+    <Danceability> "70" ;
+    <Energy> "45" ;
+    <Length> "261" ;
+    <Loudness..dB..> "-7" ;
+    <Popularity> "82" ;
+    <Speechiness> "15" ;
+    <Track.Name> "No Guidance (feat. Drake)" ;
+    <Valence> "14" ;
+    dbo:MusicGenre "dance pop" ;
+    dbo:artist "Chris Brown" .
+
+:No_Me_Conoce_-_Remix a dbo:Song ;
+    <Acousticness> "14" ;
+    <Beats.Per.Minute> "92" ;
+    <Danceability> "81" ;
+    <Energy> "79" ;
+    <Length> "309" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "83" ;
+    <Speechiness> "7" ;
+    <Track.Name> "No Me Conoce - Remix" ;
+    <Valence> "58" ;
+    dbo:MusicGenre "reggaeton flow" ;
+    dbo:artist "Jhay Cortez" .
+
+:Old_Town_Road_-_Remix a dbo:Song ;
+    <Acousticness> "5" ;
+    <Beats.Per.Minute> "136" ;
+    <Danceability> "88" ;
+    <Energy> "62" ;
+    <Length> "157" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "87" ;
+    <Speechiness> "10" ;
+    <Track.Name> "Old Town Road - Remix" ;
+    <Valence> "64" ;
+    dbo:MusicGenre "country rap" ;
+    dbo:artist "Lil Nas X" .
+
+:One_Thing_Right a dbo:Song ;
+    <Acousticness> "7" ;
+    <Beats.Per.Minute> "88" ;
+    <Danceability> "66" ;
+    <Energy> "62" ;
+    <Length> "182" ;
+    <Loudness..dB..> "-2" ;
+    <Popularity> "88" ;
+    <Speechiness> "5" ;
+    <Track.Name> "One Thing Right" ;
+    <Valence> "44" ;
+    dbo:MusicGenre "brostep" ;
+    dbo:artist "Marshmello" .
+
+:Otro_Trago a dbo:Song ;
+    <Acousticness> "14" ;
+    <Beats.Per.Minute> "176" ;
+    <Danceability> "75" ;
+    <Energy> "70" ;
+    <Length> "226" ;
+    <Loudness..dB..> "-5" ;
+    <Popularity> "91" ;
+    <Speechiness> "34" ;
+    <Track.Name> "Otro Trago" ;
+    <Valence> "62" ;
+    dbo:MusicGenre "panamanian pop" ;
+    dbo:artist "Sech" .
+
+:Otro_Trago_-_Remix a dbo:Song ;
+    <Acousticness> "7" ;
+    <Beats.Per.Minute> "176" ;
+    <Danceability> "73" ;
+    <Energy> "79" ;
+    <Length> "288" ;
+    <Loudness..dB..> "-2" ;
+    <Popularity> "87" ;
+    <Speechiness> "20" ;
+    <Track.Name> "Otro Trago - Remix" ;
+    <Valence> "76" ;
+    dbo:MusicGenre "panamanian pop" ;
+    dbo:artist "Sech" .
+
+:Panini a dbo:Song ;
+    <Acousticness> "34" ;
+    <Beats.Per.Minute> "154" ;
+    <Danceability> "70" ;
+    <Energy> "59" ;
+    <Length> "115" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "91" ;
+    <Speechiness> "8" ;
+    <Track.Name> "Panini" ;
+    <Valence> "48" ;
+    dbo:MusicGenre "country rap" ;
+    dbo:artist "Lil Nas X" .
+
+:Piece_Of_Your_Heart a dbo:Song ;
+    <Acousticness> "4" ;
+    <Beats.Per.Minute> "124" ;
+    <Danceability> "68" ;
+    <Energy> "74" ;
+    <Length> "153" ;
+    <Loudness..dB..> "-7" ;
+    <Popularity> "91" ;
+    <Speechiness> "3" ;
+    <Track.Name> "Piece Of Your Heart" ;
+    <Valence> "63" ;
+    dbo:MusicGenre "pop house" ;
+    dbo:artist "MEDUZA" .
+
+:QUE_PRETENDES a dbo:Song ;
+    <Acousticness> "3" ;
+    <Beats.Per.Minute> "93" ;
+    <Danceability> "64" ;
+    <Energy> "79" ;
+    <Length> "222" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "89" ;
+    <Speechiness> "25" ;
+    <Track.Name> "QUE PRETENDES" ;
+    <Valence> "94" ;
+    dbo:MusicGenre "latin" ;
+    dbo:artist "J Balvin" .
+
+:Ransom a dbo:Song ;
+    <Acousticness> "2" ;
+    <Beats.Per.Minute> "180" ;
+    <Danceability> "75" ;
+    <Energy> "64" ;
+    <Length> "131" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "92" ;
+    <Speechiness> "29" ;
+    <Track.Name> "Ransom" ;
+    <Valence> "23" ;
+    dbo:MusicGenre "trap music" ;
+    dbo:artist "Lil Tecca" .
+
+:Señorita a dbo:Song ;
+    <Acousticness> "4" ;
+    <Beats.Per.Minute> "117" ;
+    <Danceability> "76" ;
+    <Energy> "55" ;
+    <Length> "191" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "79" ;
+    <Speechiness> "3" ;
+    <Track.Name> "Señorita" ;
+    <Valence> "75" ;
+    dbo:MusicGenre "canadian pop" ;
+    dbo:artist "Shawn Mendes" .
+
+:Shallow a dbo:Song ;
+    <Acousticness> "37" ;
+    <Beats.Per.Minute> "96" ;
+    <Danceability> "57" ;
+    <Energy> "39" ;
+    <Length> "216" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "87" ;
+    <Speechiness> "3" ;
+    <Track.Name> "Shallow" ;
+    <Valence> "32" ;
+    dbo:MusicGenre "dance pop" ;
+    dbo:artist "Lady Gaga" .
+
+:Soltera_-_Remix a dbo:Song ;
+    <Acousticness> "36" ;
+    <Beats.Per.Minute> "92" ;
+    <Danceability> "80" ;
+    <Energy> "78" ;
+    <Length> "266" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "91" ;
+    <Speechiness> "4" ;
+    <Track.Name> "Soltera - Remix" ;
+    <Valence> "80" ;
+    dbo:MusicGenre "latin" ;
+    dbo:artist "Lunay" .
+
+:Someone_You_Loved a dbo:Song ;
+    <Acousticness> "75" ;
+    <Beats.Per.Minute> "110" ;
+    <Danceability> "50" ;
+    <Energy> "41" ;
+    <Length> "182" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "88" ;
+    <Speechiness> "3" ;
+    <Track.Name> "Someone You Loved" ;
+    <Valence> "45" ;
+    dbo:MusicGenre "pop" ;
+    dbo:artist "Lewis Capaldi" .
+
+:Sucker a dbo:Song ;
+    <Acousticness> "4" ;
+    <Beats.Per.Minute> "138" ;
+    <Danceability> "84" ;
+    <Energy> "73" ;
+    <Length> "181" ;
+    <Loudness..dB..> "-5" ;
+    <Popularity> "80" ;
+    <Speechiness> "6" ;
+    <Track.Name> "Sucker" ;
+    <Valence> "95" ;
+    dbo:MusicGenre "boy band" ;
+    dbo:artist "Jonas Brothers" .
+
+<http://example.org/Song/Summer_Days_(feat._Macklemore_&_Patrick_Stump_of_Fall_Out_Boy)> a dbo:Song ;
+    <Acousticness> "18" ;
+    <Beats.Per.Minute> "114" ;
+    <Danceability> "66" ;
+    <Energy> "72" ;
+    <Length> "164" ;
+    <Loudness..dB..> "-7" ;
+    <Popularity> "89" ;
+    <Speechiness> "6" ;
+    <Track.Name> "Summer Days (feat. Macklemore & Patrick Stump of Fall Out Boy)" ;
+    <Valence> "32" ;
+    dbo:MusicGenre "big room" ;
+    dbo:artist "Martin Garrix" .
+
+:Sunflower_-_Spider-Man:_Into_the_Spider-Verse a dbo:Song ;
+    <Acousticness> "56" ;
+    <Beats.Per.Minute> "90" ;
+    <Danceability> "76" ;
+    <Energy> "48" ;
+    <Length> "158" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "91" ;
+    <Speechiness> "5" ;
+    <Track.Name> "Sunflower - Spider-Man: Into the Spider-Verse" ;
+    <Valence> "91" ;
+    dbo:MusicGenre "dfw rap" ;
+    dbo:artist "Post Malone" .
+
+:Takeaway a dbo:Song ;
+    <Acousticness> "12" ;
+    <Beats.Per.Minute> "85" ;
+    <Danceability> "29" ;
+    <Energy> "51" ;
+    <Length> "210" ;
+    <Loudness..dB..> "-8" ;
+    <Popularity> "84" ;
+    <Speechiness> "4" ;
+    <Track.Name> "Takeaway" ;
+    <Valence> "36" ;
+    dbo:MusicGenre "edm" ;
+    dbo:artist "The Chainsmokers" .
+
+:Talk a dbo:Song ;
+    <Acousticness> "5" ;
+    <Beats.Per.Minute> "136" ;
+    <Danceability> "90" ;
+    <Energy> "40" ;
+    <Length> "198" ;
+    <Loudness..dB..> "-9" ;
+    <Popularity> "84" ;
+    <Speechiness> "13" ;
+    <Track.Name> "Talk" ;
+    <Valence> "35" ;
+    dbo:MusicGenre "pop" ;
+    dbo:artist "Khalid" .
+
+:Te_Robaré a dbo:Song ;
+    <Acousticness> "24" ;
+    <Beats.Per.Minute> "176" ;
+    <Danceability> "67" ;
+    <Energy> "75" ;
+    <Length> "202" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "88" ;
+    <Speechiness> "6" ;
+    <Track.Name> "Te Robaré" ;
+    <Valence> "80" ;
+    dbo:MusicGenre "latin" ;
+    dbo:artist "Nicky Jam" .
+
+<http://example.org/Song/The_London_(feat._J._Cole_&_Travis_Scott)> a dbo:Song ;
+    <Acousticness> "2" ;
+    <Beats.Per.Minute> "98" ;
+    <Danceability> "80" ;
+    <Energy> "59" ;
+    <Length> "200" ;
+    <Loudness..dB..> "-7" ;
+    <Popularity> "89" ;
+    <Speechiness> "15" ;
+    <Track.Name> "The London (feat. J. Cole & Travis Scott)" ;
+    <Valence> "18" ;
+    dbo:MusicGenre "atl hip hop" ;
+    dbo:artist "Young Thug" .
+
+:Truth_Hurts a dbo:Song ;
+    <Acousticness> "11" ;
+    <Beats.Per.Minute> "158" ;
+    <Danceability> "72" ;
+    <Energy> "62" ;
+    <Length> "173" ;
+    <Loudness..dB..> "-3" ;
+    <Popularity> "91" ;
+    <Speechiness> "11" ;
+    <Track.Name> "Truth Hurts" ;
+    <Valence> "41" ;
+    dbo:MusicGenre "escape room" ;
+    dbo:artist "Lizzo" .
+
+:You_Need_To_Calm_Down a dbo:Song ;
+    <Acousticness> "1" ;
+    <Beats.Per.Minute> "85" ;
+    <Danceability> "77" ;
+    <Energy> "68" ;
+    <Length> "171" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "90" ;
+    <Speechiness> "5" ;
+    <Track.Name> "You Need To Calm Down" ;
+    <Valence> "73" ;
+    dbo:MusicGenre "dance pop" ;
+    dbo:artist "Taylor Swift" .
+
+:bad_guy a dbo:Song ;
+    <Acousticness> "33" ;
+    <Beats.Per.Minute> "135" ;
+    <Danceability> "70" ;
+    <Energy> "43" ;
+    <Length> "194" ;
+    <Loudness..dB..> "-11" ;
+    <Popularity> "95" ;
+    <Speechiness> "38" ;
+    <Track.Name> "bad guy" ;
+    <Valence> "56" ;
+    dbo:MusicGenre "electropop" ;
+    dbo:artist "Billie Eilish" .
+
+<http://example.org/Song/bad_guy_(with_Justin_Bieber)> a dbo:Song ;
+    <Acousticness> "25" ;
+    <Beats.Per.Minute> "135" ;
+    <Danceability> "67" ;
+    <Energy> "45" ;
+    <Length> "195" ;
+    <Loudness..dB..> "-11" ;
+    <Popularity> "89" ;
+    <Speechiness> "30" ;
+    <Track.Name> "bad guy (with Justin Bieber)" ;
+    <Valence> "68" ;
+    dbo:MusicGenre "electropop" ;
+    dbo:artist "Billie Eilish" .
+
+<http://example.org/Song/boyfriend_(with_Social_House)> a dbo:Song ;
+    <Acousticness> "12" ;
+    <Beats.Per.Minute> "190" ;
+    <Danceability> "40" ;
+    <Energy> "80" ;
+    <Length> "186" ;
+    <Loudness..dB..> "-4" ;
+    <Popularity> "85" ;
+    <Speechiness> "46" ;
+    <Track.Name> "boyfriend (with Social House)" ;
+    <Valence> "70" ;
+    dbo:MusicGenre "dance pop" ;
+    dbo:artist "Ariana Grande" .
+
+<http://example.org/Song/fuck,_i_m_lonely_(with_Anne-Marie)_-_from_13_Reasons_Why:_Season_3> a dbo:Song ;
+    <Acousticness> "48" ;
+    <Beats.Per.Minute> "95" ;
+    <Danceability> "81" ;
+    <Energy> "56" ;
+    <Length> "199" ;
+    <Loudness..dB..> "-6" ;
+    <Popularity> "78" ;
+    <Speechiness> "7" ;
+    <Track.Name> "fuck, i'm lonely (with Anne-Marie) - from 13 Reasons Why: Season 3" ;
+    <Valence> "68" ;
+    dbo:MusicGenre "dance pop" ;
+    dbo:artist "Lauv" .
+
