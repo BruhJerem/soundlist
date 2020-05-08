@@ -8,22 +8,26 @@ const conn = new Connection({
 });
 module.exports = {
   queryRdf: function() {
-    query.execute(conn, 
-      'SONG_DB', 
-      `SELECT ?genre
+    return new Promise((resolve, reject) => {
+      query.execute(conn, 
+        'SONG_DB', 
+        `SELECT ?i ?name
         WHERE
         {
-          ?i <http://dbpedia.org/ontology/MusicGenre> ?genre .
+          ?i :Track.Name ?name.
         }`,
-    'application/sparql-results+json', {
-
-      limit: 10,
-      offset: 0,
-    
-    }).then(({ body }) => {
-      console.log(body.results.bindings);
-    }).catch((err) => {
-      console.log(err)
-    })
+      'application/sparql-results+json', {
+  
+        limit: 10,
+        offset: 0,
+      
+      }).then(({ body }) => {
+        console.log(body.results.bindings);
+        resolve(body.results.bindings)
+      }).catch((err) => {
+        console.error(err)
+        reject(err.message)
+      })
+    });
   }
 }

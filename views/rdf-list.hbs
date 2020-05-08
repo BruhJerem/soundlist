@@ -1,0 +1,18 @@
+<body>
+  {{#if err}}
+    <div class="alert alert-success col-sm-12">{{err}}</div>
+    <div id="signupalert" style="display:none" class="alert alert-danger">
+      <p>Error:</p>
+      <span></span>
+    </div>
+  {{/if}}
+  <div class="container col-sm-12" id="mainform">
+    <div style=" margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                                        
+      <ul class="list-group">
+        {{#each rdf}}
+          <li class="list-group-item"><a href="{{this.i.value}}">{{this.name.value}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</body>
