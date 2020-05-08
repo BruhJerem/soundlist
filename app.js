@@ -21,6 +21,10 @@ const app = express();
 var rdfModule = require('./RDF/RDFTripleStore.js');
 var queryRdf = rdfModule.queryRdf;
 
+// SPARQL
+var sparqlModule = require('./sparql/query-sparql.js');
+var querySparql = sparqlModule.querySparql;
+
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
@@ -77,13 +81,23 @@ let checkConnection = (req, res, next) => {
   next()
 };
 
-app.get('/rdf', function(req, res) {
+app.get('/rdf/test', function(req, res) {
   const rdf = queryRdf()
   rdf.then((list) => {
     res.render('rdf-list.hbs', {rdf: list})
   }).catch((err) => {
     res.render('rdf-list.hbs', {err: err})
   })
+})
+
+app.get('/sparql/test', function(req, res) {
+  const sparql = querySparql()
+  sparql.then((list) => {
+    res.render('sparql-list.hbs', {list: list})
+  }).catch((err) => {
+    res.render('sparql-list.hbs', {err: err})
+  })
+
 })
 
 app.get('/', function(req, res) {
