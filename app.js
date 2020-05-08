@@ -20,10 +20,13 @@ const app = express();
 // RDF
 var rdfModule = require('./RDF/RDFTripleStore.js');
 var queryRdf = rdfModule.queryRdf;
+var getInfoAboutSong = rdfModule.getInfoAboutSong;
 
 // SPARQL
 var sparqlModule = require('./sparql/query-sparql.js');
 var querySparql = sparqlModule.querySparql;
+var getAllInfosAboutArtist = sparqlModule.getAllInfosAboutArtist;
+
 
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
@@ -62,7 +65,8 @@ db.serialize(function() {
   db.run(`CREATE TABLE IF NOT EXISTS "songs" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "playlist_id" INTEGER NOT NULL,
-    "name" text NOT NULL
+    "name" text NOT NULL,
+    "artist" text NOT NULL
   );`);
 });
 app.use(express.static(path.join(__dirname, 'public')));
@@ -232,13 +236,17 @@ app.post('/song/add', checkConnection, (req, res) => {
   var playlist_id =  req.query.playlist_id
   var post  = req.body;
   var song_name= post.song_name;
+  var artist = post.artist
   console.log(song_name)
   if (song_name == '') {
     res.redirect('/playlist/'+playlist_id)
     return;
   }
-
-  var sql = "INSERT INTO `SONGS` (`name`,`playlist_id`) VALUES ('" + song_name + "', '" + playlist_id + "')";
+  if (artist == '') {
+    res.redirect('/playlist/'+playlist_id)
+    return;
+  }
+  var sql = "INSERT INTO `SONGS` (`name`,`playlist_id`, `artist`) VALUES ('" + song_name + "', '" + playlist_id + "', '" + artist + "')";
   var query = db.prepare(sql)
   query.run(function(err) {
     if (err) {
@@ -253,23 +261,54 @@ app.post('/song/add', checkConnection, (req, res) => {
 
 app.post('/song/update/:id', checkConnection, (req, res) => {
   var song_id = req.params.id
-  var post  = req.body;
-  var song_name= post.song_name;
-  if (song_name == '') {
-    res.redirect('back');
-    return;
-  }
-  var sql = "UPDATE SONGS SET name='" + song_name + "' WHERE id=" + song_id + ";";
-  var query = db.prepare(sql)
-  query.run(function(err) {
+  var sql="SELECT * FROM SONGS WHERE id='"+song_id+"';";
+  db.all(sql, function(err, songs){
     if (err) {
       console.log(err)
       return;
-    } else {
-      res.redirect('back');
     }
+    var song = songs[0]
+    var post  = req.body;
+    var song_name= post.song_name || song.song_name;
+    var artist= post.artist || song.artist;
+    var sql = "UPDATE SONGS SET name='" + song_name + "', artist='" + artist + "' WHERE id=" + song_id + ";";
+    console.log(sql)
+    var query = db.prepare(sql)
+    query.run(function(err) {
+      if (err) {
+        console.log(err)
+        return;
+      } else {
+        res.redirect('back');
+      }
+    })
+    //res.redirect('/playlist/'+playlist_id)
   })
-  //res.redirect('/playlist/'+playlist_id)
+})
+//TODO: add check connection 
+app.get('/playlist/song/:id', (req, res) => {
+  var id = req.params.id
+  var sql="SELECT * FROM SONGS WHERE id='"+id+"';";
+    db.all(sql, function(err, songs){
+      if (err) {
+        console.log(err)
+        return;
+      }
+      songs = songs[0]
+      console.log(songs)
+      getInfoAboutSong(songs.name, songs.artist).then((result) => {
+        console.log(result[0])
+        getAllInfosAboutArtist(songs.artist).then((resultsArtist) => {
+          console.log(resultsArtist[0])
+          res.render('song-detail.hbs', {infos: result[0], resultsArtist: resultsArtist[0], songName: songs.name, artist: songs.artist})
+        }).catch((err) => {
+          res.render('song-detail.hbs', {err: err})
+        })
+      }).catch((err) => {
+        console.log(err)
+        res.render('song-detail.hbs', {err: err})
+      })
+    })
 })
 
 app.get('/song/delete/:id', checkConnection, (req, res) => {

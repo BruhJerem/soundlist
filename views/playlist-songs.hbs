@@ -59,9 +59,12 @@
                 </div>
               {{/if}}
               <div class="col">
+                <a href="song/{{id}}">
                 <h4>
                   {{name}}
                 </h4>
+                <p>from {{artist}}</p>
+                </a>
               </div>
             </div>
           </div>
@@ -118,6 +121,8 @@
             <div class="modal-body form-container">
               <label for="song_name">Name</label>
               <input type="text" placeholder="Enter song name" name="song_name" required>
+              <label for="artist">Artist</label>
+              <input type="text" placeholder="Enter Artist name" name="artist" required>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -142,6 +147,8 @@
             <div class="modal-body form-container">
               <label for="song_name">Name</label>
               <input type="text" placeholder="{{name}}" name="song_name">
+              <label for="artist">Artist</label>
+              <input type="text" placeholder="{{artist}}" name="artist">
             </div>
             <div class="modal-footer">
               <a href="/song/delete/{{id}}"><button type="button" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button></a>

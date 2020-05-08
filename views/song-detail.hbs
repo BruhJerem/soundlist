@@ -24,30 +24,47 @@
   </div>
 </nav>
 <body>
-  <div class="container col-sm-12" id="mainform">
-    <div style=" margin-top:100px" class="jumbotron jumbotron-fluid mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-      <div>
-        <h1>{{infos.name}}</h1>
-      </div>
-      <div class="row" style="justify-content: center; text-align: center;">
-        {{#if infos }}
-        <div class="col-sm-6" style="margin-bottom: 10px;">
-          <div class="card" style="padding: 10px;">
-            <div class="card-header">
-              <div class="col">
-                <a href="song/{{id}}">
-                <h4>
-                  {{name}}
-                </h4>
-                <p>from {{artist}}</p>
-                </a>
-              </div>
-            </div>
-          </div>
+  <div class="container col-sm-12 " id="mainform">
+    <div style=" margin-top:100px" class=" text-center jumbotron jumbotron-fluid mainbox">
+      {{#if err}}
+        <div class="alert alert-success col-sm-12">{{err}}</div>
+        <div id="signupalert" style="display:none" class="alert alert-danger">
+          <p>Error:</p>
+          <span></span>
         </div>
+      {{/if}}
+      <div>
+        {{#if resultsArtist}}
+        {{!-- Put image of resultArtist.img.value --}}
+          <img src="{{resultsArtist.img.value}}"/>
+        {{/if}}
+        <h1>{{songName}}</h1>
+        {{#if resultsArtist}}
+          <a href="{{resultsArtist.homepage.value}}">
+            <h3>{{resultsArtist.name.value}}</h3>
+          </a>
         {{else}}
-          <h3>No infos found :(</h3>
-        {{/each}}
+          <h3>{{artist}}</h3>
+        {{/if}}
+      </div>
+      <div class="">
+        {{#if infos }}
+          <div class="" style="margin-bottom: 10px;">
+            <h4>About the Song</h4>
+            <p>acousticness: {{infos.acousticness.value}}</p>
+            <p>popularity: {{infos.popularity.value}}</p>
+            <p>genre: {{infos.genre.value}}</p>
+          </div>
+        {{else}}
+          {{#if resultsArtist}}
+          <h4>About the Artist</h4>
+          <div>
+            <p>homepage: {{resultsArtist.homepage.value}}</p>
+          </div>
+          {{else}}
+            <h3>No infos found :(</h3>
+          {{/if}}
+        {{/if}}
       </div>
     </div>
   </div>
