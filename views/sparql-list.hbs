@@ -1,91 +1,18 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Soundlist</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/list/users">All users</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/profile">{{user.user_name}}</a></li>
-        <a href="/logout"><button type="button" class="btn btn-default navbar-btn">Log out</button></a>   
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div>
-</nav>
 <body>
+  {{#if err}}
+    <div class="alert alert-success col-sm-12">{{err}}</div>
+    <div id="signupalert" style="display:none" class="alert alert-danger">
+      <p>Error:</p>
+      <span></span>
+    </div>
+  {{/if}}
   <div class="container col-sm-12" id="mainform">
-    <div style=" margin-top:100px" class="jumbotron jumbotron-fluid mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-      <div>
-        <h1>{{infos.name}}</h1>
-      </div>
-      <div class="row" style="justify-content: center; text-align: center;">
-        {{#if infos }}
-        <div class="col-sm-6" style="margin-bottom: 10px;">
-          <div class="card" style="padding: 10px;">
-            <div class="card-header">
-              <div class="col">
-                <a href="song/{{id}}">
-                <h4>
-                  {{name}}
-                </h4>
-                <p>from {{artist}}</p>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {{else}}
-          <h3>No infos found :(</h3>
+    <div style=" margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                                        
+      <ul class="list-group">
+        {{#each list}}
+          <li class="list-group-item"><a href="{{this.artist.value}}">{{this.name.value}}</a></li>
         {{/each}}
-      </div>
+      </ul>
     </div>
   </div>
 </body>
-
-<style type="text/css">
- .topcorner{
-   position:absolute;
-   top:0;
-   right:0;
-   padding: 20px;
-  }
-
-  {box-sizing: border-box;}
-
-/* Add styles to the form container */
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-}
-
-/* Full-width input fields */
-.form-container input[type=text] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-</style>

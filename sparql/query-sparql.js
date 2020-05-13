@@ -30,7 +30,7 @@ module.exports = {
       return sendQuery(query)
   },
   getAllInfosAboutArtist: function(artist) {
-    console.log(artist)
+    console.log(`Get infos about ${artist}`)
     var query = `
       PREFIX ns1: <http://www.w3.org/1999/xhtml/vocab#>
       PREFIX foaf: <http://xmlns.com/foaf/0.1/>
