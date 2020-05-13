@@ -24,7 +24,7 @@
 
 <Valence> a <Song> .
 
-:0.958333333333333 a dbo:Song ;
+:0.958333333333333 a <Song> ;
     <Acousticness> "22" ;
     <Beats.Per.Minute> "96" ;
     <Danceability> "78" ;
@@ -38,7 +38,7 @@
     dbo:MusicGenre "reggaeton" ;
     dbo:artist "Maluma" .
 
-:7_rings a dbo:Song ;
+:7_rings a <Song> ;
     <Acousticness> "59" ;
     <Beats.Per.Minute> "140" ;
     <Danceability> "78" ;
@@ -52,7 +52,7 @@
     dbo:MusicGenre "dance pop" ;
     dbo:artist "Ariana Grande" .
 
-<http://example.org/Song/Antisocial_(with_Travis_Scott)> a dbo:Song ;
+<http://example.org/Song/Antisocial_(with_Travis_Scott)> a <Song> ;
     <Acousticness> "13" ;
     <Beats.Per.Minute> "152" ;
     <Danceability> "72" ;
@@ -66,7 +66,7 @@
     dbo:MusicGenre "pop" ;
     dbo:artist "Ed Sheeran" .
 
-<http://example.org/Song/Beautiful_People_(feat._Khalid)> a dbo:Song ;
+<http://example.org/Song/Beautiful_People_(feat._Khalid)> a <Song> ;
     <Acousticness> "12" ;
     <Beats.Per.Minute> "93" ;
     <Danceability> "64" ;
@@ -80,7 +80,7 @@
     dbo:MusicGenre "pop" ;
     dbo:artist "Ed Sheeran" .
 
-:Call_You_Mine a dbo:Song ;
+:Call_You_Mine a <Song> ;
     <Acousticness> "23" ;
     <Beats.Per.Minute> "104" ;
     <Danceability> "59" ;
@@ -94,7 +94,7 @@
     dbo:MusicGenre "edm" ;
     dbo:artist "The Chainsmokers" .
 
-:Callaita a dbo:Song ;
+:Callaita a <Song> ;
     <Acousticness> "60" ;
     <Beats.Per.Minute> "176" ;
     <Danceability> "61" ;
@@ -108,7 +108,7 @@
     dbo:MusicGenre "reggaeton" ;
     dbo:artist "Bad Bunny" .
 
-:China a dbo:Song ;
+:China a <Song> ;
     <Acousticness> "8" ;
     <Beats.Per.Minute> "105" ;
     <Danceability> "79" ;
@@ -122,7 +122,7 @@
     dbo:MusicGenre "reggaeton flow" ;
     dbo:artist "Anuel AA" .
 
-:Con_Altura a dbo:Song ;
+:Con_Altura a <Song> ;
     <Acousticness> "39" ;
     <Beats.Per.Minute> "98" ;
     <Danceability> "88" ;
@@ -136,7 +136,7 @@
     dbo:MusicGenre "r&b en espanol" ;
     dbo:artist "ROSALÍA" .
 
-:Con_Calma a dbo:Song ;
+:Con_Calma a <Song> ;
     <Acousticness> "11" ;
     <Beats.Per.Minute> "94" ;
     <Danceability> "74" ;
@@ -150,7 +150,7 @@
     dbo:MusicGenre "latin" ;
     dbo:artist "Daddy Yankee" .
 
-<http://example.org/Song/Cross_Me_(feat._Chance_the_Rapper_&_PnB_Rock)> a dbo:Song ;
+<http://example.org/Song/Cross_Me_(feat._Chance_the_Rapper_&_PnB_Rock)> a <Song> ;
     <Acousticness> "21" ;
     <Beats.Per.Minute> "95" ;
     <Danceability> "75" ;
@@ -164,7 +164,7 @@
     dbo:MusicGenre "pop" ;
     dbo:artist "Ed Sheeran" .
 
-:Dance_Monkey a dbo:Song ;
+:Dance_Monkey a <Song> ;
     <Acousticness> "69" ;
     <Beats.Per.Minute> "98" ;
     <Danceability> "82" ;
@@ -178,7 +178,7 @@
     dbo:MusicGenre "australian pop" ;
     dbo:artist "Tones and I" .
 
-<http://example.org/Song/Goodbyes_(Feat._Young_Thug)> a dbo:Song ;
+<http://example.org/Song/Goodbyes_(Feat._Young_Thug)> a <Song> ;
     <Acousticness> "45" ;
     <Beats.Per.Minute> "150" ;
     <Danceability> "58" ;
@@ -192,7 +192,7 @@
     dbo:MusicGenre "dfw rap" ;
     dbo:artist "Post Malone" .
 
-:Happier a dbo:Song ;
+:Happier a <Song> ;
     <Acousticness> "19" ;
     <Beats.Per.Minute> "100" ;
     <Danceability> "69" ;
@@ -206,7 +206,7 @@
     dbo:MusicGenre "brostep" ;
     dbo:artist "Marshmello" .
 
-:Higher_Love a dbo:Song ;
+:Higher_Love a <Song> ;
     <Acousticness> "2" ;
     <Beats.Per.Minute> "104" ;
     <Danceability> "69" ;
@@ -220,7 +220,7 @@
     dbo:MusicGenre "edm" ;
     dbo:artist "Kygo" .
 
-<http://example.org/Song/How_Do_You_Sleep?> a dbo:Song ;
+<http://example.org/Song/How_Do_You_Sleep?> a <Song> ;
     <Acousticness> "15" ;
     <Beats.Per.Minute> "111" ;
     <Danceability> "48" ;
@@ -234,7 +234,7 @@
     dbo:MusicGenre "pop" ;
     dbo:artist "Sam Smith" .
 
-<http://example.org/Song/I_Don_t_Care_(with_Justin_Bieber)> a dbo:Song ;
+<http://example.org/Song/I_Don_t_Care_(with_Justin_Bieber)> a <Song> ;
     <Acousticness> "9" ;
     <Beats.Per.Minute> "102" ;
     <Danceability> "80" ;
@@ -248,7 +248,7 @@
     dbo:MusicGenre "pop" ;
     dbo:artist "Ed Sheeran" .
 
-:If_I_Can_t_Have_You a dbo:Song ;
+:If_I_Can_t_Have_You a <Song> ;
     <Acousticness> "49" ;
     <Beats.Per.Minute> "124" ;
     <Danceability> "69" ;
@@ -262,7 +262,7 @@
     dbo:MusicGenre "canadian pop" ;
     dbo:artist "Shawn Mendes" .
 
-:It_s_You a dbo:Song ;
+:It_s_You a <Song> ;
     <Acousticness> "37" ;
     <Beats.Per.Minute> "96" ;
     <Danceability> "73" ;
@@ -276,7 +276,7 @@
     dbo:MusicGenre "canadian hip hop" ;
     dbo:artist "Ali Gatie" .
 
-:LA_CANCIÓN a dbo:Song ;
+:LA_CANCIÓN a <Song> ;
     <Acousticness> "15" ;
     <Beats.Per.Minute> "176" ;
     <Danceability> "75" ;
@@ -290,7 +290,7 @@
     dbo:MusicGenre "latin" ;
     dbo:artist "J Balvin" .
 
-:Lalala a dbo:Song ;
+:Lalala a <Song> ;
     <Acousticness> "18" ;
     <Beats.Per.Minute> "130" ;
     <Danceability> "84" ;
@@ -304,7 +304,7 @@
     dbo:MusicGenre "canadian hip hop" ;
     dbo:artist "Y2K" .
 
-<http://example.org/Song/Loco_Contigo_(feat._J._Balvin_&_Tyga)> a dbo:Song ;
+<http://example.org/Song/Loco_Contigo_(feat._J._Balvin_&_Tyga)> a <Song> ;
     <Acousticness> "28" ;
     <Beats.Per.Minute> "96" ;
     <Danceability> "82" ;
@@ -318,7 +318,7 @@
     dbo:MusicGenre "dance pop" ;
     dbo:artist "DJ Snake" .
 
-<http://example.org/Song/Money_In_The_Grave_(Drake_ft._Rick_Ross)> a dbo:Song ;
+<http://example.org/Song/Money_In_The_Grave_(Drake_ft._Rick_Ross)> a <Song> ;
     <Acousticness> "10" ;
     <Beats.Per.Minute> "101" ;
     <Danceability> "83" ;
@@ -332,7 +332,7 @@
     dbo:MusicGenre "canadian hip hop" ;
     dbo:artist "Drake" .
 
-:Never_Really_Over a dbo:Song ;
+:Never_Really_Over a <Song> ;
     <Acousticness> "19" ;
     <Beats.Per.Minute> "100" ;
     <Danceability> "77" ;
@@ -346,7 +346,7 @@
     dbo:MusicGenre "dance pop" ;
     dbo:artist "Katy Perry" .
 
-<http://example.org/Song/No_Guidance_(feat._Drake)> a dbo:Song ;
+<http://example.org/Song/No_Guidance_(feat._Drake)> a <Song> ;
     <Acousticness> "12" ;
     <Beats.Per.Minute> "93" ;
     <Danceability> "70" ;
@@ -360,7 +360,7 @@
     dbo:MusicGenre "dance pop" ;
     dbo:artist "Chris Brown" .
 
-:No_Me_Conoce_-_Remix a dbo:Song ;
+:No_Me_Conoce_-_Remix a <Song> ;
     <Acousticness> "14" ;
     <Beats.Per.Minute> "92" ;
     <Danceability> "81" ;
@@ -374,7 +374,7 @@
     dbo:MusicGenre "reggaeton flow" ;
     dbo:artist "Jhay Cortez" .
 
-:Old_Town_Road_-_Remix a dbo:Song ;
+:Old_Town_Road_-_Remix a <Song> ;
     <Acousticness> "5" ;
     <Beats.Per.Minute> "136" ;
     <Danceability> "88" ;
@@ -388,7 +388,7 @@
     dbo:MusicGenre "country rap" ;
     dbo:artist "Lil Nas X" .
 
-:One_Thing_Right a dbo:Song ;
+:One_Thing_Right a <Song> ;
     <Acousticness> "7" ;
     <Beats.Per.Minute> "88" ;
     <Danceability> "66" ;
@@ -402,7 +402,7 @@
     dbo:MusicGenre "brostep" ;
     dbo:artist "Marshmello" .
 
-:Otro_Trago a dbo:Song ;
+:Otro_Trago a <Song> ;
     <Acousticness> "14" ;
     <Beats.Per.Minute> "176" ;
     <Danceability> "75" ;
@@ -416,7 +416,7 @@
     dbo:MusicGenre "panamanian pop" ;
     dbo:artist "Sech" .
 
-:Otro_Trago_-_Remix a dbo:Song ;
+:Otro_Trago_-_Remix a <Song> ;
     <Acousticness> "7" ;
     <Beats.Per.Minute> "176" ;
     <Danceability> "73" ;
@@ -430,7 +430,7 @@
     dbo:MusicGenre "panamanian pop" ;
     dbo:artist "Sech" .
 
-:Panini a dbo:Song ;
+:Panini a <Song> ;
     <Acousticness> "34" ;
     <Beats.Per.Minute> "154" ;
     <Danceability> "70" ;
@@ -444,7 +444,7 @@
     dbo:MusicGenre "country rap" ;
     dbo:artist "Lil Nas X" .
 
-:Piece_Of_Your_Heart a dbo:Song ;
+:Piece_Of_Your_Heart a <Song> ;
     <Acousticness> "4" ;
     <Beats.Per.Minute> "124" ;
     <Danceability> "68" ;
@@ -458,7 +458,7 @@
     dbo:MusicGenre "pop house" ;
     dbo:artist "MEDUZA" .
 
-:QUE_PRETENDES a dbo:Song ;
+:QUE_PRETENDES a <Song> ;
     <Acousticness> "3" ;
     <Beats.Per.Minute> "93" ;
     <Danceability> "64" ;
@@ -472,7 +472,7 @@
     dbo:MusicGenre "latin" ;
     dbo:artist "J Balvin" .
 
-:Ransom a dbo:Song ;
+:Ransom a <Song> ;
     <Acousticness> "2" ;
     <Beats.Per.Minute> "180" ;
     <Danceability> "75" ;
@@ -486,7 +486,7 @@
     dbo:MusicGenre "trap music" ;
     dbo:artist "Lil Tecca" .
 
-:Señorita a dbo:Song ;
+:Señorita a <Song> ;
     <Acousticness> "4" ;
     <Beats.Per.Minute> "117" ;
     <Danceability> "76" ;
@@ -500,7 +500,7 @@
     dbo:MusicGenre "canadian pop" ;
     dbo:artist "Shawn Mendes" .
 
-:Shallow a dbo:Song ;
+:Shallow a <Song> ;
     <Acousticness> "37" ;
     <Beats.Per.Minute> "96" ;
     <Danceability> "57" ;
@@ -514,7 +514,7 @@
     dbo:MusicGenre "dance pop" ;
     dbo:artist "Lady Gaga" .
 
-:Soltera_-_Remix a dbo:Song ;
+:Soltera_-_Remix a <Song> ;
     <Acousticness> "36" ;
     <Beats.Per.Minute> "92" ;
     <Danceability> "80" ;
@@ -528,7 +528,7 @@
     dbo:MusicGenre "latin" ;
     dbo:artist "Lunay" .
 
-:Someone_You_Loved a dbo:Song ;
+:Someone_You_Loved a <Song> ;
     <Acousticness> "75" ;
     <Beats.Per.Minute> "110" ;
     <Danceability> "50" ;
@@ -542,7 +542,7 @@
     dbo:MusicGenre "pop" ;
     dbo:artist "Lewis Capaldi" .
 
-:Sucker a dbo:Song ;
+:Sucker a <Song> ;
     <Acousticness> "4" ;
     <Beats.Per.Minute> "138" ;
     <Danceability> "84" ;
@@ -556,7 +556,7 @@
     dbo:MusicGenre "boy band" ;
     dbo:artist "Jonas Brothers" .
 
-<http://example.org/Song/Summer_Days_(feat._Macklemore_&_Patrick_Stump_of_Fall_Out_Boy)> a dbo:Song ;
+<http://example.org/Song/Summer_Days_(feat._Macklemore_&_Patrick_Stump_of_Fall_Out_Boy)> a <Song> ;
     <Acousticness> "18" ;
     <Beats.Per.Minute> "114" ;
     <Danceability> "66" ;
@@ -570,7 +570,7 @@
     dbo:MusicGenre "big room" ;
     dbo:artist "Martin Garrix" .
 
-:Sunflower_-_Spider-Man:_Into_the_Spider-Verse a dbo:Song ;
+:Sunflower_-_Spider-Man:_Into_the_Spider-Verse a <Song> ;
     <Acousticness> "56" ;
     <Beats.Per.Minute> "90" ;
     <Danceability> "76" ;
@@ -584,7 +584,7 @@
     dbo:MusicGenre "dfw rap" ;
     dbo:artist "Post Malone" .
 
-:Takeaway a dbo:Song ;
+:Takeaway a <Song> ;
     <Acousticness> "12" ;
     <Beats.Per.Minute> "85" ;
     <Danceability> "29" ;
@@ -598,7 +598,7 @@
     dbo:MusicGenre "edm" ;
     dbo:artist "The Chainsmokers" .
 
-:Talk a dbo:Song ;
+:Talk a <Song> ;
     <Acousticness> "5" ;
     <Beats.Per.Minute> "136" ;
     <Danceability> "90" ;
@@ -612,7 +612,7 @@
     dbo:MusicGenre "pop" ;
     dbo:artist "Khalid" .
 
-:Te_Robaré a dbo:Song ;
+:Te_Robaré a <Song> ;
     <Acousticness> "24" ;
     <Beats.Per.Minute> "176" ;
     <Danceability> "67" ;
@@ -626,7 +626,7 @@
     dbo:MusicGenre "latin" ;
     dbo:artist "Nicky Jam" .
 
-<http://example.org/Song/The_London_(feat._J._Cole_&_Travis_Scott)> a dbo:Song ;
+<http://example.org/Song/The_London_(feat._J._Cole_&_Travis_Scott)> a <Song> ;
     <Acousticness> "2" ;
     <Beats.Per.Minute> "98" ;
     <Danceability> "80" ;
@@ -640,7 +640,7 @@
     dbo:MusicGenre "atl hip hop" ;
     dbo:artist "Young Thug" .
 
-:Truth_Hurts a dbo:Song ;
+:Truth_Hurts a <Song> ;
     <Acousticness> "11" ;
     <Beats.Per.Minute> "158" ;
     <Danceability> "72" ;
@@ -654,7 +654,7 @@
     dbo:MusicGenre "escape room" ;
     dbo:artist "Lizzo" .
 
-:You_Need_To_Calm_Down a dbo:Song ;
+:You_Need_To_Calm_Down a <Song> ;
     <Acousticness> "1" ;
     <Beats.Per.Minute> "85" ;
     <Danceability> "77" ;
@@ -668,7 +668,7 @@
     dbo:MusicGenre "dance pop" ;
     dbo:artist "Taylor Swift" .
 
-:bad_guy a dbo:Song ;
+:bad_guy a <Song> ;
     <Acousticness> "33" ;
     <Beats.Per.Minute> "135" ;
     <Danceability> "70" ;
@@ -682,7 +682,7 @@
     dbo:MusicGenre "electropop" ;
     dbo:artist "Billie Eilish" .
 
-<http://example.org/Song/bad_guy_(with_Justin_Bieber)> a dbo:Song ;
+<http://example.org/Song/bad_guy_(with_Justin_Bieber)> a <Song> ;
     <Acousticness> "25" ;
     <Beats.Per.Minute> "135" ;
     <Danceability> "67" ;
@@ -696,7 +696,7 @@
     dbo:MusicGenre "electropop" ;
     dbo:artist "Billie Eilish" .
 
-<http://example.org/Song/boyfriend_(with_Social_House)> a dbo:Song ;
+<http://example.org/Song/boyfriend_(with_Social_House)> a <Song> ;
     <Acousticness> "12" ;
     <Beats.Per.Minute> "190" ;
     <Danceability> "40" ;
@@ -710,7 +710,7 @@
     dbo:MusicGenre "dance pop" ;
     dbo:artist "Ariana Grande" .
 
-<http://example.org/Song/fuck,_i_m_lonely_(with_Anne-Marie)_-_from_13_Reasons_Why:_Season_3> a dbo:Song ;
+<http://example.org/Song/fuck,_i_m_lonely_(with_Anne-Marie)_-_from_13_Reasons_Why:_Season_3> a <Song> ;
     <Acousticness> "48" ;
     <Beats.Per.Minute> "95" ;
     <Danceability> "81" ;

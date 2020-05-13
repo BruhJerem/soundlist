@@ -1,4 +1,19 @@
-const { Connection, query } = require('stardog');
+const { Connection, query, db } = require('stardog');
+const fs = require('fs');
+const path = require("path");
+
+Array.prototype.contains = function(element){
+  return this.indexOf(element) > -1;
+};
+
+const wrapWithResCheck = fn => res => {
+  if (!res.ok) {
+    throw new Error(
+      `Something went wrong. Received response: ${res.status} ${res.statusText}\n${res.body.message}`
+    );
+  }
+  return fn(res);
+};
 const conn = new Connection({
 
   username: 'admin',
@@ -6,11 +21,39 @@ const conn = new Connection({
   endpoint: 'http://localhost:5820',
 
 });
+const dbName = 'SONG_DB'
+const data = fs.readFileSync(path.join(__dirname, "top50.ttl"), "utf8");
+const logSuccess = () => console.log(`Created ${dbName}.`);
+const logFailure = failureReason => console.error(failureReason);
+
+checkIfDataBaseExists = (name) => {
+  return new Promise((resolve, reject) => {
+    db.list(conn).then((res) => {
+      if (res.body.databases.contains(name))
+        resolve(true)
+      else
+        resolve(false)
+    }).catch((e) => reject(e))
+  })
+}
+
+const insertQuery = `insert data { ${data} }`;
+
 module.exports = {
+  createTable: function() {
+    checkIfDataBaseExists(dbName).then((exists) => {
+      if (!exists) {
+        db.create(conn, dbName)
+        .then(wrapWithResCheck(() => query.execute(conn, dbName, insertQuery)))
+        .then(logSuccess)
+        .catch(logFailure)
+      }
+    }).catch((e) => console.error(e.message));
+  },
   queryRdf: function() {
     return new Promise((resolve, reject) => {
       query.execute(conn, 
-        'SONG_DB', 
+        dbName, 
         `SELECT ?i ?name
         WHERE
         {
@@ -33,7 +76,7 @@ module.exports = {
   getInfoAboutSong: function(songName, artist) {
     return new Promise((resolve, reject) => {
       query.execute(conn, 
-        'SONG_DB', 
+        dbName, 
         `
         prefix dbo: <http://dbpedia.org/ontology/>
         SELECT *

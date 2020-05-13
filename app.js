@@ -19,8 +19,12 @@ const app = express();
 
 // RDF
 var rdfModule = require('./RDF/RDFTripleStore.js');
+var createRDF = rdfModule.createTable;
 var queryRdf = rdfModule.queryRdf;
 var getInfoAboutSong = rdfModule.getInfoAboutSong;
+
+// Creation of SONG_DB Database
+createRDF()
 
 // SPARQL
 var sparqlModule = require('./sparql/query-sparql.js');

@@ -45,7 +45,7 @@ if __name__=='__main__':
 
 			# Add triples using store's add method.
 			# 
-			store.add((song, RDF.type, dbo.Song))
+			store.add((song, RDF.type, URIRef("Song")))
 
 			if(dict(row)['Track.Name'] != ''):
 				store.add((song, URIRef("Track.Name"), Literal(dict(row)['Track.Name'])))
