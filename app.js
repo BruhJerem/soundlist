@@ -199,10 +199,8 @@ app.get('/playlist/:id', checkConnection, function(req, res) {
   
   var user =  req.session.user;
   const playlistId = req.params.id;
-  // indexPage is if the playlist appartient aux current user
+  // indexPage is if the playlist is current user
   var indexPage = false
-  //TODO: send to playlist-songs.hbs with the songs of the playlist
-
   var sql="SELECT * FROM PLAYLIST WHERE id='"+playlistId+"';";
   db.all(sql, function(err, playlists){
     if (err) {
@@ -285,8 +283,7 @@ app.post('/song/update/:id', checkConnection, (req, res) => {
     //res.redirect('/playlist/'+playlist_id)
   })
 })
-//TODO: add check connection 
-app.get('/playlist/song/:id', (req, res) => {
+app.get('/playlist/song/:id', checkConnection, (req, res) => {
   var id = req.params.id
   var sql="SELECT * FROM SONGS WHERE id='"+id+"';";
     db.all(sql, function(err, songs){
