@@ -57,7 +57,7 @@ module.exports = {
         `SELECT ?i ?name
         WHERE
         {
-          ?i :Track.Name ?name.
+          ?i <http://example.org/Song/Track.Name> ?name.
         }`,
       'application/sparql-results+json', {
   
@@ -82,10 +82,10 @@ module.exports = {
         SELECT *
         WHERE
         {
-          ?i :Track.Name ?name.
-          ?i :Acousticness ?acousticness.
+          ?i <http://example.org/Song/Track.Name> ?name.
+          ?i <http://example.org/Song/Acousticness> ?acousticness.
           ?i dbo:MusicGenre ?genre.
-          ?i :Popularity ?popularity.
+          ?i <http://example.org/Song/Popularity> ?popularity.
           ?i dbo:artist ?artist.
           FILTER regex(?name, "${songName}")
           FILTER regex(?artist, "${artist}")
