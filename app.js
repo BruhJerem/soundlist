@@ -109,12 +109,11 @@ app.get('/sparql/test', function(req, res) {
 })
 
 app.get('/', function(req, res) {
-  var user =  req.session.user;
-  userId = req.session.userId;
-  console.log(userId)
+  const user =  req.session.user;
+  const userId = req.session.userId;
   if (userId) {
-    var sql="SELECT * FROM PLAYLIST WHERE user_id='"+userId+"' ORDER BY name;";
-    db.all(sql, function(err, playlist){
+    var sql="SELECT * FROM PLAYLIST WHERE user_id=? ORDER BY name;";
+    db.all(sql, [userId], function(err, playlist){
       if (err) {
         console.log(err)
         return;
@@ -132,7 +131,7 @@ app.post('/', function (req, res) {
 })
 
 app.get('/about', function(req, res) {
-  userId = req.session.userId;
+  const userId = req.session.userId;
 	if(userId == null){
 		res.redirect("/");
 		return;
@@ -141,7 +140,7 @@ app.get('/about', function(req, res) {
 })
 
 app.get('/contact', function(req, res) {
-  userId = req.session.userId;
+  const userId = req.session.userId;
 	if(userId == null){
 		res.redirect("/");
 		return;
@@ -150,8 +149,8 @@ app.get('/contact', function(req, res) {
 })
 
 app.post('/contact', function (req, res) {
-  message = 'Thank you, we get back to you shortly.';
-  userId = req.session.userId;
+  const message = 'Thank you, we get back to you shortly.';
+  const userId = req.session.userId;
 	if(userId == null){
 		res.render("home.hbs", {message: message});
 		return;
@@ -160,10 +159,10 @@ app.post('/contact', function (req, res) {
 })
 
 app.get('/list/users', checkConnection, function(req, res) {
-  var user =  req.session.user;
-  userId = req.session.userId;
-  var sql="SELECT id, user_name FROM USERS WHERE NOT id='"+userId+"' ORDER BY user_name;";
-  db.all(sql, function(err, results){
+  const user =  req.session.user;
+  const userId = req.session.userId;
+  const sql="SELECT id, user_name FROM USERS WHERE NOT id=? ORDER BY user_name;";
+  db.all(sql, [userId], function(err, results){
     if (err) {
       console.log(err)
       return;
@@ -176,17 +175,16 @@ app.get('/list/users', checkConnection, function(req, res) {
 
 app.get('/dashboard/:id', checkConnection, function(req, res){
   const id = req.params.id;
-  // CHeck if connected
-  var user =  req.session.user;
+  const user =  req.session.user;
 
-  var sql="SELECT id, user_name FROM USERS WHERE id='"+id+"';";
-  db.all(sql, function(err, results){
+  var sql="SELECT id, user_name FROM USERS WHERE id=?;";
+  db.all(sql, [id], function(err, results){
     if (err) {
       console.log(err)
       return;
     }
-    sql="SELECT * FROM PLAYLIST WHERE user_id='"+id+"' AND public='true' ORDER BY name;";
-    db.all(sql, function(err, playlist){
+    sql="SELECT * FROM PLAYLIST WHERE user_id=?' AND public='true' ORDER BY name;";
+    db.all(sql, [id], function(err, playlist){
       if (err) {
         console.log(err)
         return;
@@ -198,15 +196,13 @@ app.get('/dashboard/:id', checkConnection, function(req, res){
 })
 
 app.get('/playlist/:id', checkConnection, function(req, res) {
-  userId = req.session.userId;
-  // // If not connected
-  
-  var user =  req.session.user;
+  const userId = req.session.userId;
+  const user =  req.session.user;
   const playlistId = req.params.id;
   // indexPage is if the playlist is current user
   var indexPage = false
-  var sql="SELECT * FROM PLAYLIST WHERE id='"+playlistId+"';";
-  db.all(sql, function(err, playlists){
+  var sql="SELECT * FROM PLAYLIST WHERE id=?;";
+  db.all(sql, [playlistId], function(err, playlists){
     if (err) {
       console.log(err)
       return;
@@ -221,8 +217,8 @@ app.get('/playlist/:id', checkConnection, function(req, res) {
       res.redirect('/')
       return;
     }
-    var sql="SELECT * FROM SONGS WHERE playlist_id='"+playlistId+"';";
-    db.all(sql, function(err, songs){
+    sql="SELECT * FROM SONGS WHERE playlist_id=?;";
+    db.all(sql, [playlistId], function(err, songs){
       if (err) {
         console.log(err)
         return;
@@ -235,11 +231,10 @@ app.get('/playlist/:id', checkConnection, function(req, res) {
 })
 
 app.post('/song/add', checkConnection, (req, res) => {
-  var playlist_id =  req.query.playlist_id
-  var post  = req.body;
-  var song_name= post.song_name;
-  var artist = post.artist
-  console.log(song_name)
+  const playlist_id =  req.query.playlist_id
+  const post = req.body;
+  const song_name = post.song_name;
+  const artist = post.artist
   if (song_name == '') {
     res.redirect('/playlist/'+playlist_id)
     return;
@@ -248,23 +243,39 @@ app.post('/song/add', checkConnection, (req, res) => {
     res.redirect('/playlist/'+playlist_id)
     return;
   }
-  var sql = "INSERT INTO `SONGS` (`name`,`playlist_id`, `artist`) VALUES ('" + song_name + "', '" + playlist_id + "', '" + artist + "')";
-  var query = db.prepare(sql)
-  query.run(function(err) {
+  var sql="SELECT * FROM PLAYLIST WHERE id=?;";
+  db.all(sql, [playlist_id], function(err, playlists){
     if (err) {
       console.log(err)
       return;
-    } else {
-      console.log(post)
-      res.redirect('/playlist/'+playlist_id)
+    }
+    const playlist = playlists[0]
+    // Check if the playlist is owned by the current user
+    if (playlist.user_id == userId) {
+      sql = "INSERT INTO `SONGS` (`name`,`playlist_id`, `artist`) VALUES (?,?,?)";
+      db.all(sql, [song_name, playlist_id, artist], function(err) {
+        if (err) {
+          console.error(err)
+          return;
+        } else {
+          console.log(post)
+          res.redirect('/playlist/'+playlist_id)
+          return
+        }
+      })
+    }
+    // only userId can access
+    else {
+      res.redirect('/')
+      return;
     }
   })
 })
 
 app.post('/song/update/:id', checkConnection, (req, res) => {
-  var song_id = req.params.id
-  var sql="SELECT * FROM SONGS WHERE id='"+song_id+"';";
-  db.all(sql, function(err, songs){
+  const song_id = req.params.id
+  var sql="SELECT * FROM SONGS WHERE id=?;";
+  db.all(sql, [song_id], function(err, songs){
     if (err) {
       console.log(err)
       return;
@@ -273,10 +284,8 @@ app.post('/song/update/:id', checkConnection, (req, res) => {
     var post  = req.body;
     var song_name= post.song_name || song.song_name;
     var artist= post.artist || song.artist;
-    var sql = "UPDATE SONGS SET name='" + song_name + "', artist='" + artist + "' WHERE id=" + song_id + ";";
-    console.log(sql)
-    var query = db.prepare(sql)
-    query.run(function(err) {
+    sql = "UPDATE SONGS SET name=?, artist=? WHERE id=?;";
+    db.all(sql, [song_name, artist, song_id], function(err){
       if (err) {
         console.log(err)
         return;
@@ -284,42 +293,38 @@ app.post('/song/update/:id', checkConnection, (req, res) => {
         res.redirect('back');
       }
     })
-    //res.redirect('/playlist/'+playlist_id)
   })
 })
+
 app.get('/playlist/song/:id', checkConnection, (req, res) => {
-  var id = req.params.id
-  var sql="SELECT * FROM SONGS WHERE id='"+id+"';";
-    db.all(sql, function(err, songs){
-      if (err) {
-        console.log(err)
-        return;
-      }
-      songs = songs[0]
-      console.log(songs)
-      getInfoAboutSong(songs.name, songs.artist).then((result) => {
-        console.log(result[0])
-        getAllInfosAboutArtist(songs.artist).then((resultsArtist) => {
-          console.log(resultsArtist[0])
-          res.render('song-detail.hbs', {infos: result[0], resultsArtist: resultsArtist[0], songName: songs.name, artist: songs.artist})
-        }).catch((err) => {
-          res.render('song-detail.hbs', {err: err})
-        })
+  const id = req.params.id
+  var sql="SELECT * FROM SONGS WHERE id=?;";
+  db.all(sql, [id], function(err, songs){
+    if (err) {
+      console.log(err)
+      return;
+    }
+    songs = songs[0]
+    getInfoAboutSong(songs.name, songs.artist).then((result) => {
+      console.log(result[0])
+      getAllInfosAboutArtist(songs.artist).then((resultsArtist) => {
+        console.log(resultsArtist[0])
+        res.render('song-detail.hbs', {infos: result[0], resultsArtist: resultsArtist[0], songName: songs.name, artist: songs.artist})
       }).catch((err) => {
-        console.log(err)
         res.render('song-detail.hbs', {err: err})
       })
+    }).catch((err) => {
+      console.log(err)
+      res.render('song-detail.hbs', {err: err})
     })
+  })
 })
 
 app.get('/song/delete/:id', checkConnection, (req, res) => {
-  console.log('Song deleted')
   var song_id = req.params.id
-  userId = req.session.userId;
-  console.log(song_id)
-  // Security: check that the playlist_id => user_id is current userId
-  var sql="SELECT * FROM SONGS WHERE id='"+song_id+"';";
-  db.all(sql, function(err, songs){
+  const userId = req.session.userId;
+  var sql="SELECT * FROM SONGS WHERE id=;";
+  db.all(sql, [song_id], function(err, songs){
     if (err) {
       console.log(err)
       return;
@@ -329,9 +334,9 @@ app.get('/song/delete/:id', checkConnection, (req, res) => {
       res.redirect('back')
       return
     }
-    var playlist_id = song.playlist_id
-    var sql="SELECT * FROM PLAYLIST WHERE id='"+playlist_id+"';";
-    db.all(sql, function(err, playlists){
+    const playlist_id = song.playlist_id
+    sql="SELECT * FROM PLAYLIST WHERE id=?;";
+    db.all(sql, [playlist_id], function(err, playlists){
       if (err) {
         console.log(err)
         return;
@@ -340,8 +345,8 @@ app.get('/song/delete/:id', checkConnection, (req, res) => {
       // Check if user_id of playlist == currentId
       if (playlist.user_id == userId) {
         // Here we can proceed the delete
-        var sql="DELETE FROM SONGS WHERE id="+song_id;
-        db.all(sql, function(err, results){
+        var sql="DELETE FROM SONGS WHERE id=?";
+        db.all(sql, [song_id], function(err, results){
           if (err) {
             console.log(err)
             return
@@ -357,7 +362,7 @@ app.get('/song/delete/:id', checkConnection, (req, res) => {
 })
 
 app.post('/playlist/add', checkConnection, function(req, res) {
-  userId = req.session.userId;
+  const userId = req.session.userId;
   if(req.method == "POST"){
     var post  = req.body;
     var name= post.playlist_name;
@@ -367,9 +372,8 @@ app.post('/playlist/add', checkConnection, function(req, res) {
       public = false
     else
       public = true
-    var sql = "INSERT INTO `PLAYLIST` (`name`,`user_id`,`public`, `description`) VALUES ('" + name + "', '" + userId + "', '" + public + "', '" + description + "')";
-    var query = db.prepare(sql)
-    query.run(function(err) {
+    var sql = "INSERT INTO `PLAYLIST` (`name`,`user_id`,`public`, `description`) VALUES (?, ?, ?, ?)";
+    db.all(sql, [name, userId, public, description], function(err) {
       if (err) {
         console.log(err)
         return;
@@ -381,11 +385,11 @@ app.post('/playlist/add', checkConnection, function(req, res) {
 })
 
 app.post('/playlist/update/:id', checkConnection, function(req, res) {
-  userId = req.session.userId;
+  const userId = req.session.userId;
   const id = req.params.id;
   if(req.method == "POST"){
-    var sql="SELECT * FROM PLAYLIST WHERE id='"+id+"';";
-    db.all(sql, function(err, playlist){
+    var sql="SELECT * FROM PLAYLIST WHERE id=?;";
+    db.all(sql, [id], function(err, playlist){
       if (err) {
         console.log(err)
         return;
@@ -402,9 +406,8 @@ app.post('/playlist/update/:id', checkConnection, function(req, res) {
         public = false
       else
         public = true
-      sql = "UPDATE PLAYLIST SET name='" + name + "', description='" + description +"', public='" + public + "' WHERE id=" + id + ";";
-      var query = db.prepare(sql)
-      query.run(function(err) {
+      sql = "UPDATE PLAYLIST SET name=?, description=?, public=? WHERE id=?;";
+      db.all(sql, [name, description, public, id], function(err) {
         if (err) {
           console.log(err)
           return;
@@ -421,8 +424,8 @@ app.get('/playlist/delete/:id', checkConnection, function(req, res) {
   const userId = req.session.userId;
   // SECURITY
   // Check that the playlist user_id === current id
-  var sql="SELECT * FROM PLAYLIST WHERE id='"+id+"';";
-  db.all(sql, function(err, results){
+  var sql="SELECT * FROM PLAYLIST WHERE id=?;";
+  db.all(sql, [id], function(err, results){
     if (err) {
       console.log(err)
       return;
@@ -431,8 +434,8 @@ app.get('/playlist/delete/:id', checkConnection, function(req, res) {
 
     if (playlist.user_id == userId) {
       // Here we can proceed the delete
-      var sql="DELETE FROM PLAYLIST WHERE id='"+id+"';";
-      db.all(sql, function(err, results){
+      var sql="DELETE FROM PLAYLIST WHERE id=?;";
+      db.all(sql, [id], function(err, results){
         if (err) {
           console.log(err)
           res.redirect('/')
@@ -449,16 +452,18 @@ app.get('/playlist/delete/:id', checkConnection, function(req, res) {
 
 app.get('/logout', function(req, res) {
   req.session.destroy(function(err) {
-    res.redirect("/")
+    if (err) {
+      console.error(err)
+    } else {
+      res.redirect("/")
+    }
  })
 })
 
 // Login page
 
 app.get('/login/', function(req, res){
-  var user =  req.session.user;
-  userId = req.session.userId;
-	
+  const userId = req.session.userId;
 	if(userId){
 		res.redirect("/");
 		return;
@@ -468,38 +473,35 @@ app.get('/login/', function(req, res){
 
 app.post('/login', function(req, res) {
   var message = '';
-  var sess = req.session; 
-
   if(req.method == "POST"){
       var post  = req.body;
       var name= post.user_name;
       var pass= post.password;
       var hash = bcrypt.hashSync(pass, salt);
-      var sql="SELECT id, first_name, last_name, user_name, password FROM USERS WHERE user_name='"+name+"' and password='"+hash+"';";
-      db.get(sql, function(err, results){ 
+      var sql="SELECT id, first_name, last_name, user_name, password FROM USERS WHERE user_name=? and password=?;";
+      db.get(sql, [name, hash], function(err, results){ 
         if(results){
           req.session.userId = results.id;
           req.session.user = results;
           res.redirect('/');
         }
         else{
-            message = 'Wrong Credentials.';
-            console.log(err)
-            res.render('login.hbs',{message: message});
+          message = 'Wrong Credentials.';
+          console.log(err)
+          res.render('login.hbs',{message: message});
         }
-                
       });
   } else {
-      res.render('login.hbs',{message: message});
+    res.render('login.hbs',{message: message});
   }         
 })
 
-app.get('/register/', function(request, response){
-  response.render("register.hbs")
+app.get('/register/', function(req, res){
+  res.render("register.hbs")
 })
 
 app.post('/register', function(req, res) {
-  message = '';
+  var message = '';
   if(req.method == "POST"){
       var post  = req.body;
       var name= post.user_name;
@@ -509,10 +511,9 @@ app.post('/register', function(req, res) {
 
       var hash = bcrypt.hashSync(pass, salt);
 
-      var sql = "INSERT INTO `users`(`first_name`,`last_name`,`user_name`, `password`) VALUES ('" + fname + "','" + lname + "','" + name + "','" + hash + "')";
+      var sql = "INSERT INTO `users`(`first_name`,`last_name`,`user_name`, `password`) VALUES (?, ?, ?, ?)";
 
-      var query = db.prepare(sql)
-      query.run(function(err) {
+      db.all(sql, [fname, lname, name, hash], function(err) {
         if (err) {
           console.log(err)
           message = "Username already taken.";
@@ -531,14 +532,11 @@ app.post('/register', function(req, res) {
 
 app.get('/profile', function(req, res){
   var user =  req.session.user;
-  userId = req.session.userId;
-	
+  const userId = req.session.userId;
 	if(userId == null){
 		res.redirect("/");
 		return;
 	}
-  
-  var user =  req.session.user;
   res.render('profile.hbs', {user: user})
 })
 
@@ -552,10 +550,9 @@ app.post('/profile/update', function(req, res){
   var name= post.user_name || user.user_name;
   var fname= post.first_name || user.first_name;
   var lname= post.last_name || user.last_name;
-  var sql = "UPDATE USERS SET user_name = '" + name + "', first_name= '" + fname +"', last_name='" + lname + "', password='" + encryptedPass + "' WHERE id = " + req.session.userId + ";";
+  var sql = "UPDATE USERS SET user_name=?, first_name=?, last_name=?, password=? WHERE id = ?;";
 
-  var query = db.prepare(sql)
-  query.run(function(err) {
+  db.all(sql, [name, fname, lname, encryptedPass, req.session.userId], function(err) {
     if (err) {
       console.log(err)
       message = "This username is already taken.";
@@ -563,8 +560,8 @@ app.post('/profile/update', function(req, res){
       return;
     }
     message = "Succesfully! Your account has been updated.";
-    var sql="SELECT * FROM USERS WHERE id='"+req.session.userId+"';";
-    db.get(sql, function(err, results){
+    sql="SELECT * FROM USERS WHERE id=?;";
+    db.get(sql, [req.session.userId], function(err, results){
       if (err) {
         console.log(err)
         return;
@@ -580,10 +577,10 @@ app.get('/profile/delete/', function(req, res){
   const userId = req.session.userId;
   if (userId) {
     console.log('Profile deleted')
-    var sql="DELETE FROM USERS WHERE id='"+userId+"';";
-    db.all(sql, function(err, results){
+    var sql="DELETE FROM USERS WHERE id=?;";
+    db.all(sql, [userId], function(err, results){
       if (err) {
-        console.log(err)
+        console.error(err)
         res.redirect('/logout')
         return;
       }
@@ -651,8 +648,8 @@ app.post(api_link+'oauth/login', (req, res) => {
     }
 
     var hash = bcrypt.hashSync(pass, salt);
-    var sql="SELECT id, first_name, last_name, user_name, password FROM USERS WHERE user_name='"+name+"' and password='"+hash+"';";
-    db.get(sql, function(err, results){ 
+    var sql="SELECT id, first_name, last_name, user_name, password FROM USERS WHERE user_name=? and password=?;";
+    db.get(sql, [name, hash], function(err, results){ 
       console.log(results)
       if(results){
         jwt.sign({
@@ -672,7 +669,7 @@ app.post(api_link+'oauth/login', (req, res) => {
         });
       }
       else{
-        console.log(err)
+        console.error(err)
         return res.status(400).send({
           success: 'false',
           message: 'wrong credentials'
@@ -722,12 +719,11 @@ app.post(api_link+'oauth/register', (req, res) => {
 
       var hash = bcrypt.hashSync(pass, salt);
 
-      var sql = "INSERT INTO `users`(`first_name`,`last_name`,`user_name`, `password`) VALUES ('" + fname + "','" + lname + "','" + name + "','" + hash + "')";
+      var sql = "INSERT INTO `users`(`first_name`,`last_name`,`user_name`, `password`) VALUES (?, ?, ?, ?)";
 
-      var query = db.prepare(sql)
-      query.run(function(err) {
+      db.all(sql, [fname, lname, name, hash], function(err) {
         if (err) {
-          console.log(err)
+          console.error(err)
           return res.status(400).send({
             success: "false",
             message: "username already taken"
@@ -749,8 +745,8 @@ app.post(api_link+'oauth/register', (req, res) => {
 
 app.get(api_link + 'playlist', checkToken, (req, res) => {
   var userId = req.decoded.id
-  var sql="SELECT * FROM PLAYLIST WHERE user_id='"+userId+"' ORDER BY name;";
-  db.all(sql, function(err, playlist){
+  var sql="SELECT * FROM PLAYLIST WHERE user_id=? ORDER BY name;";
+  db.all(sql, [userId], function(err, playlist){
     if (err) {
       return res.status(400).send({
         success: 'false',
@@ -766,7 +762,7 @@ app.get(api_link + 'playlist', checkToken, (req, res) => {
 });
 
 app.post(api_link + 'playlist/add', checkToken, (req, res) => {
-  var userId = req.decoded.id
+  const userId = req.decoded.id
   const post = req.query;
   var name= post.playlist_name;
   var description = post.description || ''
@@ -782,9 +778,8 @@ app.post(api_link + 'playlist/add', checkToken, (req, res) => {
     public = false
   else
     public = true
-  var sql = "INSERT INTO `PLAYLIST` (`name`,`user_id`,`public`, `description`) VALUES ('" + name + "', '" + userId + "', '" + public + "', '" + description + "')";
-  var query = db.prepare(sql)
-  query.run(function(err) {
+  var sql = "INSERT INTO `PLAYLIST` (`name`,`user_id`,`public`, `description`) VALUES (?, ?, ?, ?)";
+  db.all(sql, [name, userId, public, description], function(err) {
     if (err) {
       return res.status(400).send({
         success: 'false',
@@ -810,10 +805,8 @@ app.delete(api_link + 'playlist/delete', checkToken, (req, res) => {
     });
   }
 
-  // SECURITY
-  // Check that the playlist user_id === current id
-  var sql="SELECT * FROM PLAYLIST WHERE id='"+id+"';";
-  db.all(sql, function(err, results){
+  var sql="SELECT * FROM PLAYLIST WHERE id=?;";
+  db.all(sql, [id], function(err, results){
     if (err) {
       return res.status(400).send({
         success: 'false',
@@ -829,9 +822,8 @@ app.delete(api_link + 'playlist/delete', checkToken, (req, res) => {
     }
 
     if (playlist.user_id == userId) {
-      // Here we can proceed the delete
-      var sql="DELETE FROM PLAYLIST WHERE id='"+id+"';";
-      db.all(sql, function(err, results){
+      sql="DELETE FROM PLAYLIST WHERE id=?;";
+      db.all(sql, [id], function(err, results){
         if (err) {
           return res.status(400).send({
             success: 'false',
@@ -864,8 +856,8 @@ app.post(api_link + 'playlist/update', checkToken, (req, res) => {
     });
   }
 
-  var sql="SELECT * FROM PLAYLIST WHERE id='"+id+"';";
-  db.all(sql, function(err, playlist){
+  var sql="SELECT * FROM PLAYLIST WHERE id=?;";
+  db.all(sql, [id], function(err, playlist){
     if (err) {
       console.log(err)
       return;
@@ -884,9 +876,8 @@ app.post(api_link + 'playlist/update', checkToken, (req, res) => {
       public = false
     else
       public = true
-    sql = "UPDATE PLAYLIST SET name='" + name + "', description='" + description +"', public='" + public + "' WHERE id=" + id + ";";
-    var query = db.prepare(sql)
-    query.run(function(err) {
+    sql = "UPDATE PLAYLIST SET name=?, description=?, public=? WHERE id=?;";
+    db.all(sql, [name, description, public, id], function(err) {
       if (err) {
         return res.status(400).send({
           success: 'false',
@@ -914,8 +905,8 @@ app.get(api_link + 'song', checkToken, (req, res) => {
     });
   }
 
-  var sql="SELECT * FROM PLAYLIST WHERE id='"+playlistId+"';";
-  db.all(sql, function(err, playlists){
+  var sql="SELECT * FROM PLAYLIST WHERE id=?;";
+  db.all(sql, [playlistId], function(err, playlists){
     if (err) {
       return res.status(400).send({
         success: 'false',
@@ -934,8 +925,8 @@ app.get(api_link + 'song', checkToken, (req, res) => {
         message: 'playlist not public'
       });
     }
-    var sql="SELECT * FROM SONGS WHERE playlist_id='"+playlistId+"';";
-    db.all(sql, function(err, songs){
+    var sql="SELECT * FROM SONGS WHERE playlist_id=?;";
+    db.all(sql, [playlistId], function(err, songs){
       if (err) {
         return res.status(400).send({
           success: 'false',
@@ -967,19 +958,29 @@ app.post(api_link+'song/add', checkToken, (req, res) => {
       message: 'no song_name'
     });
   }
-  var sql = "INSERT INTO `SONGS` (`name`,`playlist_id`) VALUES ('" + song_name + "', '" + playlist_id + "')";
-  var query = db.prepare(sql)
-  query.run(function(err) {
+  var sql="SELECT * FROM PLAYLIST WHERE id=?;";
+  db.all(sql, [playlist_id], function(err, playlists){
     if (err) {
-      return res.status(400).send({
-        success: 'false',
-        message: err
-      });
-    } else {
-      return res.status(200).send({
-        success: 'true',
-        message: 'song add successful'
-      });
+      console.log(err)
+      return;
+    }
+    const playlist = playlists[0]
+    // Check if the playlist is owned by the current user
+    if (playlist.user_id == userId) {
+      sql = "INSERT INTO `SONGS` (`name`,`playlist_id`) VALUES (?, ?)";
+      db.all(sql, [song_name, playlist_id], function(err) {
+        if (err) {
+          return res.status(400).send({
+            success: 'false',
+            message: err
+          });
+        } else {
+          return res.status(200).send({
+            success: 'true',
+            message: 'song add successful'
+          });
+        }
+      })
     }
   })
 })
@@ -1002,9 +1003,8 @@ app.post(api_link+'song/update', checkToken, (req, res) => {
       message: 'no song_name'
     });
   }
-  var sql = "UPDATE SONGS SET name='" + song_name + "' WHERE id=" + song_id + ";";
-  var query = db.prepare(sql)
-  query.run(function(err) {
+  var sql = "UPDATE SONGS SET name=? WHERE id=?;";
+  db.all(sql, [song_name, song_id], function(err) {
     if (err) {
       return res.status(400).send({
         success: 'false',
@@ -1024,8 +1024,8 @@ app.delete(api_link+'song/delete', checkToken, (req, res) => {
   var userId = req.decoded.id
 
   // Security: check that the playlist_id => user_id is current userId
-  var sql="SELECT * FROM SONGS WHERE id='"+song_id+"';";
-  db.all(sql, function(err, songs){
+  var sql="SELECT * FROM SONGS WHERE id=?;";
+  db.all(sql, [song_id], function(err, songs){
     if (err) {
       return res.status(400).send({
         success: 'false',
@@ -1040,8 +1040,8 @@ app.delete(api_link+'song/delete', checkToken, (req, res) => {
       });
     }
     var playlist_id = song.playlist_id
-    var sql="SELECT * FROM PLAYLIST WHERE id='"+playlist_id+"';";
-    db.all(sql, function(err, playlists){
+    var sql="SELECT * FROM PLAYLIST WHERE id=?;";
+    db.all(sql, [playlist_id], function(err, playlists){
       if (err) {
         return res.status(400).send({
           success: 'false',
@@ -1052,8 +1052,8 @@ app.delete(api_link+'song/delete', checkToken, (req, res) => {
       // Check if user_id of playlist == currentId
       if (playlist.user_id == userId) {
         // Here we can proceed the delete
-        var sql="DELETE FROM SONGS WHERE id="+song_id;
-        db.all(sql, function(err, results){
+        var sql="DELETE FROM SONGS WHERE id=?";
+        db.all(sql, [song_id], function(err, results){
           if (err) {
             return res.status(400).send({
               success: 'false',
@@ -1077,5 +1077,3 @@ app.delete(api_link+'song/delete', checkToken, (req, res) => {
 
 app.listen(port)
 console.log("Listening on port " + port + " ...");
-
-// CHECK BY DELETE PLAYLIST IF PLAYLIST EXISTS !!!!

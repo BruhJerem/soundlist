@@ -7,6 +7,7 @@ SoundList is a music playlist manager where the user can share his playlists to 
 This Web App also uses RDF Triple Store and SPARQL.
 
 ## Setup
+
 Run this in your console
 
     stardog-admin server start
@@ -22,6 +23,7 @@ The don't forget to close stardog
     stardog-admin server stop
 
 ## REST API
+
 soundlist-report
 
 REST API
@@ -30,17 +32,13 @@ The REST API is a very smart way to interact with the web application or with ne
 
 For example: localhost:8080/api/v1/login?user_name=1234&password=1234 Different responses code:
 
--   - Status code 200 if the request was carried out successfully.
-    
--   - Status code 401 if the Authorization header is missing, or if the Access Token is invalid, or if the
-    
-    user is not authorized to create a new playlist for that account.
-    
--   - Status code 400 if anything is wrong (e.g. missing password, etc.)
-    
-    All the details of the routes can be found in the [documentation](https://documenter.getpostman.com/view/5496386/SzYUZg9M?version=latest).
+- Status code 200 if the request was carried out successfully.
 
-soundlist-report
+- Status code 401 if the Authorization header is missing, or if the Access Token is invalid, or if the user is not authorized to create a new playlist for that account.
+
+- Status code 400 if anything is wrong (e.g. missing password, etc.)
+
+    All the details of the routes can be found in the [documentation](https://documenter.getpostman.com/view/5496386/SzYUZg9M?version=latest).
 
 ## Linked Open Data
 
