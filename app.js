@@ -183,7 +183,7 @@ app.get('/dashboard/:id', checkConnection, function(req, res){
       console.log(err)
       return;
     }
-    sql="SELECT * FROM PLAYLIST WHERE user_id=?' AND public='true' ORDER BY name;";
+    sql="SELECT * FROM PLAYLIST WHERE user_id=? AND public='true' ORDER BY name;";
     db.all(sql, [id], function(err, playlist){
       if (err) {
         console.log(err)
@@ -323,7 +323,7 @@ app.get('/playlist/song/:id', checkConnection, (req, res) => {
 app.get('/song/delete/:id', checkConnection, (req, res) => {
   var song_id = req.params.id
   const userId = req.session.userId;
-  var sql="SELECT * FROM SONGS WHERE id=;";
+  var sql="SELECT * FROM SONGS WHERE id=?;";
   db.all(sql, [song_id], function(err, songs){
     if (err) {
       console.log(err)
@@ -502,6 +502,7 @@ app.get('/register/', function(req, res){
 
 app.post('/register', function(req, res) {
   var message = '';
+  // TODO: Change and put it in header and not in link
   if(req.method == "POST"){
       var post  = req.body;
       var name= post.user_name;
@@ -946,6 +947,9 @@ app.post(api_link+'song/add', checkToken, (req, res) => {
   var playlist_id =  req.query.playlist_id
   var post  = req.query;
   var song_name= post.song_name;
+  var artist = post.artist;
+  var userId = req.decoded.id
+
   if (!playlist_id) {
     return res.status(400).send({
       success: 'false',
@@ -958,6 +962,12 @@ app.post(api_link+'song/add', checkToken, (req, res) => {
       message: 'no song_name'
     });
   }
+  if (!artist) {
+    return res.status(400).send({
+      success: 'false',
+      message: 'no artist'
+    });
+  }
   var sql="SELECT * FROM PLAYLIST WHERE id=?;";
   db.all(sql, [playlist_id], function(err, playlists){
     if (err) {
@@ -967,8 +977,8 @@ app.post(api_link+'song/add', checkToken, (req, res) => {
     const playlist = playlists[0]
     // Check if the playlist is owned by the current user
     if (playlist.user_id == userId) {
-      sql = "INSERT INTO `SONGS` (`name`,`playlist_id`) VALUES (?, ?)";
-      db.all(sql, [song_name, playlist_id], function(err) {
+      sql = "INSERT INTO `SONGS` (`name`,`playlist_id`, `artist`) VALUES (?, ?, ?)";
+      db.all(sql, [song_name, playlist_id, artist], function(err) {
         if (err) {
           return res.status(400).send({
             success: 'false',
@@ -989,6 +999,8 @@ app.post(api_link+'song/update', checkToken, (req, res) => {
   var post  = req.query;
   var song_name= post.song_name;
   var song_id = post.song_id
+  var artist = post.artist;
+
 
   if (!song_id) {
     return res.status(400).send({
@@ -1003,8 +1015,14 @@ app.post(api_link+'song/update', checkToken, (req, res) => {
       message: 'no song_name'
     });
   }
-  var sql = "UPDATE SONGS SET name=? WHERE id=?;";
-  db.all(sql, [song_name, song_id], function(err) {
+  if (!artist) {
+    return res.status(400).send({
+      success: 'false',
+      message: 'no artist'
+    });
+  }
+  sql = "UPDATE SONGS SET name=?, artist=? WHERE id=?;";
+  db.all(sql, [song_name, artist, song_id], function(err) {
     if (err) {
       return res.status(400).send({
         success: 'false',
