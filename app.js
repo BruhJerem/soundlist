@@ -282,8 +282,14 @@ app.post('/song/update/:id', checkConnection, (req, res) => {
     }
     var song = songs[0]
     var post  = req.body;
-    var song_name= post.song_name || song.song_name;
-    var artist= post.artist || song.artist;
+    var song_name= post.song_name;
+    if (!song_name) {
+      song_name = song.name
+    }
+    var artist= post.artist;
+    if (!artist) {
+      artist = song.artist
+    }
     sql = "UPDATE SONGS SET name=?, artist=? WHERE id=?;";
     db.all(sql, [song_name, artist, song_id], function(err){
       if (err) {
@@ -305,10 +311,10 @@ app.get('/playlist/song/:id', checkConnection, (req, res) => {
       return;
     }
     songs = songs[0]
+    console.log(songs)
     getInfoAboutSong(songs.name, songs.artist).then((result) => {
-      console.log(result[0])
+      console.log('All info about song RDF : ' + result[0])
       getAllInfosAboutArtist(songs.artist).then((resultsArtist) => {
-        console.log(resultsArtist[0])
         res.render('song-detail.hbs', {infos: result[0], resultsArtist: resultsArtist[0], songName: songs.name, artist: songs.artist})
       }).catch((err) => {
         res.render('song-detail.hbs', {err: err})
@@ -399,8 +405,15 @@ app.post('/playlist/update/:id', checkConnection, function(req, res) {
         return
       }
       var post  = req.body;
-      var name= post.playlist_name || playlist[0].name;
-      var description = post.description || playlist[0].description
+      var name= post.playlist_name;
+      if (!name) {
+        name = playlist[0].name
+      }
+      
+      var description = post.description
+      if (!description) {
+        description = playlist[0].description
+      }
       var public= post.public;
       if (!public)
         public = false
